@@ -2,7 +2,7 @@ import reactLogo from './assets/react.svg'
 import './App.css'
 import { ProductCard } from './components/ProductCard'
 import { productData } from './lib/data'
-import { useState } from 'react'
+import { useReducer, useState } from 'react'
 import { CartProduct, Product } from './lib/types'
 import { Cart } from './components/Cart'
 
@@ -18,18 +18,50 @@ import { Cart } from './components/Cart'
  *  const dispatch = (action) => setState(reducer(state, action));
  *  return [state, dispatch];
  * }
- * 
  */
+
+enum CartActionType {
+  ADD,
+  REMOVE,
+  UPDATE
+}
+
+const cartReducer = (state: CartProduct[], action: { type: CartActionType, payload: CartProduct }): CartProduct[] => {
+  switch (action.type) {
+    case CartActionType.ADD: {
+      return [...state, action.payload];
+    }
+    case CartActionType.REMOVE: {
+      return state.filter(item => item.id !== action.payload.id);
+    }
+    case CartActionType.UPDATE: {
+      return state.map(item => item.id === action.payload.id ? action.payload : item);
+    }
+    default: return state;
+  }
+}
+
 
 function App() {
 
   const [productList] = useState<Product[]>(productData);
 
-  const [cartProductList, setCartProductList] = useState<CartProduct[]>([]);
+  const [state, dispatch] = useReducer(cartReducer, []);
 
   const addToCart = (product: Product) => {
     console.log("add: " + product);
-    setCartProductList([...cartProductList, { ...product, quantity: 1 }]);
+    const cartProduct: CartProduct = { ...product, quantity: 1 };
+    dispatch({ type: CartActionType.ADD, payload: cartProduct });
+  }
+
+  const onRemoveFromCart = (id: string) => {
+    console.log("remove: " + id);
+    dispatch({ type: CartActionType.REMOVE, payload: { id: id } });
+  }
+
+  const onUpdateQuantity = (id: string, quantity: number) => {
+    console.log("update: " + id + " " + quantity);
+    dispatch({ type: CartActionType.UPDATE, payload: { id: id, quantity: quantity } });
   }
 
   return (
@@ -50,7 +82,7 @@ function App() {
       </div>
 
       {/* 购物车 */}
-      <Cart cartProductList={cartProductList} />
+      <Cart cartProductList={state} onRemoveFromCart={onRemoveFromCart} onUpdateQuantity={onUpdateQuantity} />
 
     </>
   )
