@@ -1,0 +1,37 @@
+.switch {
+    width: 80px;
+    height: 30px;
+
+    /* 清除checkbox原有的样式 */
+    -webkit-appearance: none;
+    appearance: none;
+
+    /* 增加背景色 */
+    background-color: rosybrown;
+
+    /* 边框 */
+    border: 2px solid rgba(0, 0, 0, 0.2);
+
+    position: relative;
+}
+
+.switch::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 26px;
+    width: 30px;
+    background-color: rgb(209, 216, 223);
+    border-radius: 35%;
+    transition: all 0.35s ease-in-out;
+}
+
+/* :checked =>  复选框被选中时，执行 */
+.switch:checked {
+    background-color: rgb(138, 101, 152);
+}
+
+.switch:checked::before {
+    left: calc(100% - 30px);
+}
