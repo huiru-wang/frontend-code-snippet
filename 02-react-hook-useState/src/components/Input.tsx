@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import './style.css'
+import './App.css'
 
 interface InputProps {
     value: string;

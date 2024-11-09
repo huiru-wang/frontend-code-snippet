@@ -1,6 +1,0 @@
-/* 表单对齐 */
-label {
-    display: inline-block;
-    width: 100px;
-    text-align-last: right;
-}

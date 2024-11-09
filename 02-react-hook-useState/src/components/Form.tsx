@@ -1,4 +1,6 @@
-import './style.css'
+import './App.css'
+
+
 interface FormDataProps {
     username: string;
     email: string;

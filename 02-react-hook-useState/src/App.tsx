@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import './App.css'
-import { Input } from './components/input/Input';
-import { Switch } from './components/switch/Swtich';
-import { Form } from './components/form/Form';
+import { Input } from './components/Input';
+import { Switch } from './components/Swtich';
+import { Form } from './components/Form';
 
 function App() {
   // int useState
