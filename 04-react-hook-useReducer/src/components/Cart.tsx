@@ -1,11 +1,11 @@
 import { CartProduct } from "../lib/types";
 import { CartProductItem } from "./CartProductItem";
-
+import '../App.css'
 
 interface CartProps {
     cartProductList: CartProduct[];
-    onRemoveFromCart: (id: string) => void;
-    onUpdateQuantity: (id: string, quantity: number) => void;
+    onRemoveFromCart: (cartProduct: CartProduct) => void;
+    onUpdateQuantity: (cartProduct: CartProduct, updateQuantity: number) => void;
 }
 
 
@@ -15,20 +15,23 @@ export const Cart: React.FC<CartProps> = (
 
     return (
         <div className="cart">
-            {cartProductList.map(cartProduct => {
-                if (cartProduct.quantity === undefined) {
-                    return null;
-                }
-                return (
-                    <CartProductItem
-                        key={cartProduct.id}
-                        product={cartProduct}
-                        quantity={cartProduct.quantity}
-                        onRemoveFromCart={onRemoveFromCart}
-                        onUpdateQuantity={onUpdateQuantity}
-                    />
-                )
-            })}
+            <div className="cart-header">Shopping Cart</div>
+            <div>
+                {cartProductList.map(cartProduct => {
+                    return (
+                        <CartProductItem
+                            key={cartProduct.id}
+                            product={cartProduct}
+                            onRemoveFromCart={onRemoveFromCart}
+                            onUpdateQuantity={onUpdateQuantity}
+                        />
+                    )
+                })}
+            </div>
+            <div className="cart-total">Total: ${cartProductList.reduce((acc, cur) => {
+                return acc + (cur.price * cur.quantity!);
+            }, 0).toFixed(2)}
+            </div>
         </div>
     )
 };

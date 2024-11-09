@@ -1,4 +1,3 @@
-import reactLogo from './assets/react.svg'
 import './App.css'
 import { ProductCard } from './components/ProductCard'
 import { productData } from './lib/data'
@@ -12,6 +11,8 @@ import { Cart } from './components/Cart'
  * 1. reducer函数由用户定义
  * 2. initialState：state的初始状态
  * 3. initFn：可选，初始化时执行一次
+ * 
+ * useReducer必须保持纯粹、幂等，每一个Action都应该作为单一的变更，而不是拆分为多个变更；
  * 
  * function useReducer(reducer, initialState, initFn) {
  *  const [state, setState] = useState(initialState);
@@ -27,15 +28,18 @@ enum CartActionType {
 }
 
 const cartReducer = (state: CartProduct[], action: { type: CartActionType, payload: CartProduct }): CartProduct[] => {
+  const updateProduct = action.payload;
   switch (action.type) {
     case CartActionType.ADD: {
-      return [...state, action.payload];
+      return [...state, Object.assign({}, updateProduct)];
     }
+
     case CartActionType.REMOVE: {
-      return state.filter(item => item.id !== action.payload.id);
+      return state.filter(item => item.id !== updateProduct.id);
     }
+
     case CartActionType.UPDATE: {
-      return state.map(item => item.id === action.payload.id ? action.payload : item);
+      return state.map(item => item.id === updateProduct.id ? updateProduct : item);
     }
     default: return state;
   }
@@ -48,29 +52,53 @@ function App() {
 
   const [state, dispatch] = useReducer(cartReducer, []);
 
+  /**
+   * 添加商品到购物车
+   * @param product 商品
+   */
   const addToCart = (product: Product) => {
-    console.log("add: " + product);
     const cartProduct: CartProduct = { ...product, quantity: 1 };
-    dispatch({ type: CartActionType.ADD, payload: cartProduct });
+    let existProduct: CartProduct | undefined;
+
+    // 检查是否已经有了该商品
+    if (state) {
+      existProduct = state.find(item => item.id === cartProduct.id);
+    }
+
+    // 有则累加，无则新增
+    // ?? 0 表示如果为null或undefined 取默认值0
+    if (existProduct) {
+      const updatedCartProduct = { ...existProduct, quantity: (existProduct.quantity ?? 0) + 1 };
+      dispatch({ type: CartActionType.UPDATE, payload: updatedCartProduct });
+    } else {
+      dispatch({ type: CartActionType.ADD, payload: cartProduct });
+    }
   }
 
-  const onRemoveFromCart = (id: string) => {
-    console.log("remove: " + id);
-    dispatch({ type: CartActionType.REMOVE, payload: { id: id } });
+  /**
+   * 删除购物车内商品
+   * @param cartProduct 购物车内商品
+   */
+  const onRemoveFromCart = (cartProduct: CartProduct) => {
+    dispatch({ type: CartActionType.REMOVE, payload: cartProduct });
   }
 
-  const onUpdateQuantity = (id: string, quantity: number) => {
-    console.log("update: " + id + " " + quantity);
-    dispatch({ type: CartActionType.UPDATE, payload: { id: id, quantity: quantity } });
+  /**
+   * 更新购物车内商品数量
+   * @param cartProduct 购物车内商品
+   * @param updateQuantity 更新的数量, 1或-1
+   */
+  const onUpdateQuantity = (cartProduct: CartProduct, updateQuantity: number) => {
+    const product = { ...cartProduct, quantity: cartProduct.quantity + updateQuantity }
+    if (product.quantity <= 0) {
+      dispatch({ type: CartActionType.REMOVE, payload: product });
+    } else {
+      dispatch({ type: CartActionType.UPDATE, payload: product });
+    }
   }
 
   return (
     <>
-      <div>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
 
       {/* 商品详情列表 */}
       <div className="card-container">
