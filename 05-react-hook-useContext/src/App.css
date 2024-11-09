@@ -1,0 +1,43 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.post-container {
+  display: flex;
+  padding: 10px 10px;
+}
+
+.post-card {
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px 10px;
+}
+
+.post-card-light {
+  background-color: whitesmoke;
+  color: #333;
+
+}
+
+.post-card-dark {
+  background-color: dimgray;
+  color: rgb(202, 160, 105);
+}
+
+.button-light {
+  background-color: #fafafa;
+  color: darkblue;
+  border-radius: 5px;
+
+}
+
+.button-dark {
+  background-color: #333;
+  color: beige;
+}
