@@ -1,13 +1,13 @@
 import './App.css'
 import { Layout } from './components/Layout'
-import { ThemeProvider } from './contexts/ThemeContext'
+import { ThemeProvider } from './contexts/ThemeProvider'
 
 function App() {
 
   return (
     <ThemeProvider>
       <Layout />
-    </ThemeProvider>
+    </ThemeProvider >
   )
 }
 

@@ -1,26 +1,28 @@
-import { useTheme } from "../contexts/ThemeContext";
+import { ThemeContext } from "../contexts/ThemeContext";
 import { posts } from "../lib/data";
 import { PostCard } from "./PostCard";
 import '../App.css'
+import { useContext, useState } from "react";
 
 export const Layout: React.FC = () => {
 
-    const { theme, toggleTheme } = useTheme();
+    // 使用Context
+    const { toggleTheme } = useContext(ThemeContext);
+
+    const [checked, setChecked] = useState(true)
 
     if (!posts) {
         return <div>Error</div>
     }
 
+    const changeTheme = () => {
+        toggleTheme()
+        setChecked(!checked)
+    }
+
     return (
         <div>
-            <div>
-                <button
-                    className={`${theme === 'light' ? 'button-light' : 'button-dark'}`}
-                    onClick={toggleTheme}
-                >
-                    Change Theme
-                </button>
-            </div>
+            <input type="checkbox" className="theme-switch" checked={checked} onChange={changeTheme} />
             <PostCard postList={posts} />
         </div>
     );

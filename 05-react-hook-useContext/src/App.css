@@ -1,43 +1,90 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   text-align: center;
 }
 
-.post-container {
+.card-container-light {
   display: flex;
-  padding: 10px 10px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgb(233, 240, 243);
+  color: #212020;
 }
 
-.post-card {
-  border: 1px solid grey;
+.card-container-dark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgb(35, 34, 34);
+  color: #ddd8d8;
+}
+
+.card-light {
+  width: 200px;
+  height: 200px;
   border-radius: 5px;
   padding: 1rem;
   margin: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 10px 10px;
+  background-color: rgb(119, 93, 93);
+  color: #e2dddd;
+  border: 2px solid rgb(86, 60, 90);
+  box-shadow: 10px 10px 2px rgba(0, 0, 0, 0.1);
 }
 
-.post-card-light {
-  background-color: whitesmoke;
-  color: #333;
-
-}
-
-.post-card-dark {
-  background-color: dimgray;
-  color: rgb(202, 160, 105);
-}
-
-.button-light {
-  background-color: #fafafa;
-  color: darkblue;
+.card-dark {
+  width: 200px;
+  height: 200px;
   border-radius: 5px;
-
+  padding: 1rem;
+  margin: 1rem;
+  margin: 10px 10px;
+  background-color: rgb(74, 67, 74);
+  color: #ddd8d8;
+  border: 2px solid rgb(183, 149, 110);
+  box-shadow: 10px 10px 2px rgba(249, 248, 248, 0.1);
 }
 
-.button-dark {
-  background-color: #333;
-  color: beige;
+/* switch 样式 */
+.theme-switch {
+  width: 70px;
+  height: 30px;
+
+  /* 清除checkbox原有的样式 */
+  -webkit-appearance: none;
+  appearance: none;
+
+  /* 增加背景色 */
+  background-color: rgb(24, 23, 23);
+
+  /* 边框 */
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+
+  position: relative;
+}
+
+.theme-switch::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 26px;
+  width: 30px;
+  background-color: rgb(140, 140, 182);
+  border-radius: 35%;
+  transition: all 0.35s ease-in-out;
+}
+
+/* :checked =>  复选框被选中时，执行 */
+.theme-switch:checked {
+  background-color: rgb(214, 205, 218);
+}
+
+.theme-switch:checked::before {
+  left: calc(100% - 30px);
 }

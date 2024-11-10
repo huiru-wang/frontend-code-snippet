@@ -1,22 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Post } from '../lib/types';
-import { useTheme } from '../contexts/ThemeContext';
+import { ThemeContext } from '../contexts/ThemeContext';
+import '../App.css';
 
 interface PostCardProps {
     postList: Post[];
 }
 export const PostCard: React.FC<PostCardProps> = ({ postList }) => {
 
-    // 从context中获取当前主题
-    const { theme } = useTheme();
+    // 2. 使用context
+    const { theme } = useContext(ThemeContext);
+
+    console.log(theme);
 
     return (
-        <div className={`${theme === 'light' ? 'card-container post-card-light' : 'card-container post-card-dark'}`}>
+        <div className={`${theme === 'light' ? 'card-container-light' : 'card-container-dark'}`}>
             {postList.map(post => {
                 return (
-                    <div className='post-card'>
-                        <h5 className="card-title">{post.title}</h5>
-                        <p className="card-text">{post.content}</p>
+                    // 拼接theme
+                    <div className={`card-${theme}`}>
+                        <h5>{post.title}</h5>
+                        <p>{post.content}</p>
                     </div>
                 );
             })
