@@ -19,7 +19,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl }) => {
     // 1. 使用Ref操作dom
     const videoRef = useRef<HTMLVideoElement>(null)
 
-    // 2. 使用Ref，记录一个不需要触发重新渲染的状态，与UI无关的状态
+    // 2. 使用Ref，记录播放周期，播放期间的发生的渲染，不需要每次都更新此count，playCount是一个跨渲染周期的值
     const playCountRef = useRef<number>(0)
 
     // 3. 使用useState记录当前时间、播放状态
@@ -39,7 +39,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl }) => {
                 video.removeEventListener('ended', handleVideoEnded);
             };
         }
-    }, []);
+        // 当videoUrl应当重新
+    }, [videoUrl, videoRef, playCountRef]);
 
     /**
      * 时间更新，更新当前时间
@@ -74,7 +75,6 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl }) => {
         } else {
             videoRef.current?.play()
         }
-        console.log(videoRef.current?.currentTime);
         setIsPlaying(!isPlaying);
     }
 

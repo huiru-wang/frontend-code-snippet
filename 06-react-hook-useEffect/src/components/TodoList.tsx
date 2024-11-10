@@ -14,6 +14,12 @@ import { ItemList } from "./ItemList";
  * 1  useEffect仅用于与外部系统交互、数据同步等操作，如果仅仅是内部的状态调整、同步、渲染，不要使用useEffect
  * 2. 它可能很慢，这是不可预估的
  * 3. 它可能出错，这也是不可预测的。
+ * 
+ * Effect 描述了如何将外部系统与当前的 props 和 state 同步
+ * 
+ * useEffect lifecycle :
+ * https://react.dev/learn/lifecycle-of-reactive-effects
+ * https://zh-hans.react.dev/learn/lifecycle-of-reactive-effects
  */
 
 export const TodoList: React.FC = () => {
@@ -30,6 +36,7 @@ export const TodoList: React.FC = () => {
      * 外部系统数据同步
      */
     useEffect(() => {
+        const controller = new AbortController();
         TodoService.fetchTodoList().then(data => {
             setTodoList(data)
             const unCompletedItems = data.filter(item => !item.completed)
@@ -37,6 +44,11 @@ export const TodoList: React.FC = () => {
         }).catch(error => {
             console.error("Failed to fetch todo list:", error);
         })
+
+        return () => {
+            // 取消请求
+            controller.abort();
+        };
     }, [])
 
     /**
