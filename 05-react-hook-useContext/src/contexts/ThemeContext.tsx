@@ -6,7 +6,7 @@ interface ThemeContextType {
     toggleTheme: () => void;
 }
 
-// 1. 创建context
+// 1. 创建一个context，指定context的内容
 export const ThemeContext = createContext<ThemeContextType>({
     theme: "light",
     toggleTheme: () => { }

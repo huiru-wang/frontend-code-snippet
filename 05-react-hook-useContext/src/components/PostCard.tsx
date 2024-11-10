@@ -8,7 +8,8 @@ interface PostCardProps {
 }
 export const PostCard: React.FC<PostCardProps> = ({ postList }) => {
 
-    // 2. 使用context
+    // 4. 使用useContext，并传入要使用的主题context
+    // 从themeContext中取出：由ThemeProvider传递下来的主题theme状态
     const { theme } = useContext(ThemeContext);
 
     console.log(theme);
