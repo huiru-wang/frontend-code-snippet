@@ -34,6 +34,8 @@ export const TodoList: React.FC = () => {
             setTodoList(data)
             const unCompletedItems = data.filter(item => !item.completed)
             setUnCompletedTodos(unCompletedItems)
+        }).catch(error => {
+            console.error("Failed to fetch todo list:", error);
         })
     }, [])
 
@@ -45,7 +47,7 @@ export const TodoList: React.FC = () => {
         e.preventDefault();
         const inputElement = e.target as HTMLFormElement;
         const content: string = (inputElement.elements[0] as HTMLInputElement).value;
-        if (content) {
+        if (content && content.length > 0 && content.length <= 100) {
             setSubmitLoading(true)
             TodoService.addTodoItem(content).then(data => {
                 setTodoList([...todoList, data])
@@ -62,8 +64,7 @@ export const TodoList: React.FC = () => {
     const checkTodoItem = (id: number) => {
         const updatedTodoList = todoList.map(item => {
             if (item.id === id) {
-                const status = item.completed
-                return { ...item, completed: !status };
+                return { ...item, completed: !item.completed };
             }
             return item;
         });
