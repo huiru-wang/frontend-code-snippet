@@ -1,0 +1,35 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.todo-container {
+  border: 3px solid #ae6cb8;
+  box-shadow: 5px 5px 5px #c0bdc1;
+}
+
+.add-todo {
+  display: flex;
+  border-bottom: 3px solid #ae6cb8;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-todo-input {
+  border: 3px solid #d3aa8f;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-item {
+  width: 300px;
+  margin: 1px 1px;
+  display: flex;
+  border: 1px solid #a99393;
+}
