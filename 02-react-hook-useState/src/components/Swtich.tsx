@@ -1,5 +1,5 @@
 import { FC } from "react";
-import './App.css'
+import '../App.css'
 
 interface SwitchProps {
     checked: boolean;

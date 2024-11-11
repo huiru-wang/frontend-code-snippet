@@ -4,11 +4,15 @@ interface FilterBarProps {
     minPrice: number;
     maxPrice: number;
     keyword: string;
-    onPriceChange: (min: number, max: number) => void;
+    onMinPriceChange: (min: number) => void;
+    onMaxPriceChange: (max: number) => void;
     onSearchKeywordChange: (filter: string) => void;
 }
 
-const FilterBar: React.FC<FilterBarProps> = ({ minPrice, maxPrice, keyword, onPriceChange, onSearchKeywordChange }) => {
+const FilterBar: React.FC<FilterBarProps> = ({ minPrice, maxPrice, keyword, onMinPriceChange, onMaxPriceChange, onSearchKeywordChange }) => {
+
+    console.log('FilterBar rendered');
+
     return (
         <div className="filter-bar">
             <div className="filter-input">
@@ -17,7 +21,7 @@ const FilterBar: React.FC<FilterBarProps> = ({ minPrice, maxPrice, keyword, onPr
                     type="number"
                     placeholder="Min Price"
                     value={minPrice}
-                    onChange={(e) => onPriceChange(Number(e.target.value), maxPrice)}
+                    onChange={(e) => onMinPriceChange(Number(e.target.value))}
                 />
             </div>
             <div className="filter-input">
@@ -26,7 +30,7 @@ const FilterBar: React.FC<FilterBarProps> = ({ minPrice, maxPrice, keyword, onPr
                     type="number"
                     placeholder="Max Price"
                     value={maxPrice}
-                    onChange={(e) => onPriceChange(minPrice, Number(e.target.value))}
+                    onChange={(e) => onMaxPriceChange(Number(e.target.value))}
                 />
             </div>
             <div className="filter-input">
@@ -43,3 +47,4 @@ const FilterBar: React.FC<FilterBarProps> = ({ minPrice, maxPrice, keyword, onPr
 };
 
 export default React.memo(FilterBar);
+// export default FilterBar;

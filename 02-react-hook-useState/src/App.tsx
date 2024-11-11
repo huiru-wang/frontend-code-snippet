@@ -8,6 +8,18 @@ function App() {
   // int useState
   const [count, setCount] = useState<number>(0);
 
+  const setCountWithValue = () => {
+    // setCount是异步操作，且会通过队列执行，如果是相同的操作，则会被去重
+    setCount(count + 1)
+    setCount(count + 1)
+  }
+
+  const setCountWithCallback = () => {
+    // 使用回调函数，则不会被去重，每次执行都会拿到当前的最新值
+    setCount((current) => current + 1)
+    setCount((current) => current + 1)
+  }
+
   // boolean useState
   const [check, setCheck] = useState<boolean>(true);
 
@@ -27,8 +39,15 @@ function App() {
   return (
     <>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={setCountWithValue}>
+          count is {count} with set value
+        </button>
+      </div>
+      <div className="gradient-divider"></div>
+
+      <div className="card">
+        <button onClick={setCountWithCallback}>
+          count is {count} with set callback
         </button>
       </div>
 

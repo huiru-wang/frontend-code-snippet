@@ -6,6 +6,9 @@ interface ProductListProps {
     products: Product[];
 }
 const ProductList: React.FC<ProductListProps> = ({ products }) => {
+
+    console.log("ProductList rendered");
+
     return (
         <div className="product-list">
             {
@@ -19,3 +22,4 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
 
 
 export default React.memo(ProductList);
+// export default ProductList;

@@ -23,7 +23,7 @@ function App() {
    */
   const filteredProducts = useMemo(() => {
     // 重新计算的时机
-    console.log('Filtering products...');
+    console.log('Compute filteredProducts');
 
     return products.filter(product => {
       const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
@@ -33,13 +33,16 @@ function App() {
 
   }, [products, minPrice, maxPrice, keyword]);
 
-  const onPriceChange = (min: number, max: number) => {
+  const onMinPriceChange = (min: number) => {
     setMinPrice(min);
+  };
+
+  const onMaxPriceChange = (max: number) => {
     setMaxPrice(max);
   };
 
   const onSearchKeywordChange = (keyword: string) => {
-    setKeyword(keyword)
+    setKeyword(keyword);
   };
 
   return (
@@ -53,7 +56,8 @@ function App() {
           minPrice={minPrice}
           maxPrice={maxPrice}
           keyword={keyword}
-          onPriceChange={onPriceChange}
+          onMinPriceChange={onMinPriceChange}
+          onMaxPriceChange={onMaxPriceChange}
           onSearchKeywordChange={onSearchKeywordChange}
         />
         <ProductList products={filteredProducts} />

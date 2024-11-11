@@ -8,6 +8,8 @@ interface ProductProps {
 
 export const ProductItem: React.FC<ProductProps> = ({ product }) => {
 
+    console.log("ProductItem rendered");
+
     const { theme } = useContext(ThemeContext)
 
     return (
