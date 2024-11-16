@@ -285,7 +285,6 @@ createRoot(document.getElementById('root')!).render(
 ```shell
 src/
     |- components/              # 基础组件
-    |       |- BlogCard.tsx
     |       |- Navbar.tsx
     |       |- Tag.tsx
     |- lib/                     # 类型、数据
