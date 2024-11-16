@@ -90,3 +90,21 @@ body {
     transform: translateY(-2px);
   }
 }
+
+.like-button {
+  margin-top: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* 鼠标悬停时按钮背景色变化 */
+.like-button:hover {
+  background-color: #dca9a9;
+}

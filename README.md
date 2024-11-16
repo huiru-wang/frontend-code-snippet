@@ -282,7 +282,6 @@ createRoot(document.getElementById('root')!).render(
 
 ## 01-react-basic
 
-项目结构：
 ```shell
 src/
     |- components/              # 基础组件
@@ -301,15 +300,29 @@ src/
 index.html
 ```
 
-### props
+### 父子组件传递props
 ```tsx
 // 父组件 传递props
 const App: React.FC<{}> = () => {
-  const [blogs, _] = useState<BlogPost[]>(blogPosts)
+  const [blogs, setBlogs] = useState<BlogPost[]>(blogPosts)
+
+  // 点赞，将指定id的博客的like + 1
+  const like = (id: number) => {
+    setBlogs(
+        blogs.map(blog => {
+          if (blog.id === id) {
+            return { ...blog, like: blog.like + 1 }
+          } else {
+            return blog
+          }
+        })
+    )
+  }
+
   return (
     <>
         // 传递props
-        <BlogList blogs={blogs} />
+        <BlogList blogs={blogs} like={like} />
     </>
   )
 }
@@ -317,16 +330,31 @@ const App: React.FC<{}> = () => {
 // 子组件 接收props
 interface BlogListProps {
     blogs: BlogPost[];
+    like: (id: number) => void;
 }
-
-// 结构interface，获取blogs
-export const BlogList: React.FC<BlogListProps> = ({ blogs }) => {
+// 解构interface，获取blogs、like函数
+export const BlogList: React.FC<BlogListProps> = ({ blogs, like }) => {
 
     return (
         <div className="blog-list">
             {
+                // 父组件props
                 blogs.map((blog) => (
-                    < BlogCard blogPost={blog} />
+                    <div className="blog-card">
+                        // title
+                        <div className="blog-card-title">
+                            <h2>{blog.title}</h2>
+                        </div>
+
+                        // 点赞按钮，并执行父组件函数
+                        <div>
+                            <button
+                                className="like-button"
+                                onClick={() => like(blog.id)}>
+                                Like {blog.like}
+                            </button>
+                        </div>
+                    </div>
                 ))}
         </div>
     )
@@ -336,6 +364,9 @@ export const BlogList: React.FC<BlogListProps> = ({ blogs }) => {
 ### routes
 
 1. 引入路由组件
+```shell
+pnpm add react-router-dom@6
+```
 ```tsx
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 ```
