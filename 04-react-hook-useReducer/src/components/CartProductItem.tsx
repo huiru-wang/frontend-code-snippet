@@ -17,13 +17,17 @@ export const CartProductItem: React.FC<CartProductItemProps> = (
                 <p>${product.price}</p>
             </div>
             <div className="cart-item-quantity">
-                <div className="cart-item-actions">
-                    <button onClick={() => onUpdateQuantity(product, 1)}>+</button>
-                </div>
-                <p>{product.quantity}</p>
+
                 <div className="cart-item-actions">
                     <button onClick={() => onUpdateQuantity(product, -1)}>-</button>
                 </div>
+
+                <p>{product.quantity}</p>
+
+                <div className="cart-item-actions">
+                    <button onClick={() => onUpdateQuantity(product, 1)}>+</button>
+                </div>
+
                 <div className="cart-item-actions remove-button">
                     <button onClick={() => onRemoveFromCart(product)}>Remove</button>
                 </div>
