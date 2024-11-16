@@ -8,7 +8,7 @@ pnpm init
 
 ```json
 {
-  "name": "01-react-basic",
+  "name": "00-project-basic",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -29,7 +29,7 @@ pnpm add vite @vitejs/plugin-react -D
 
 ```json
 {
-  "name": "01-react-basic",
+  "name": "00-project-basic",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -66,7 +66,7 @@ pnpm add @types/react @types/react-dom -D
 ```
 ```json
 {
-  "name": "01-react-basic",
+  "name": "00-project-basic",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -214,7 +214,7 @@ pnpm dev
 ```
 项目结构
 ```shell
-01-react-basic
+00-project-basic
     |- src/
         |- main.tsx
     |- index.html
