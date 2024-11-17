@@ -2,8 +2,6 @@ import { FeedItem } from "../lib/types";
 
 export const DataService = {
     async fetchData(cursor: number, pageSize: number): Promise<FeedItem[]> {
-        console.log(cursor, pageSize);
-
         const delay = Math.floor(Math.random() * 1000) + 1000; // 1000ms 到 2000ms 之间的随机延迟
         await new Promise(resolve => setTimeout(resolve, delay));
 

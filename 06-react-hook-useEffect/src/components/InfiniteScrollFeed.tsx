@@ -49,6 +49,7 @@ export const InfiniteScrollFeed: React.FC = () => {
     // 因此loadData函数必须是多次执行总是返回正确的结果
     useEffect(() => {
         DataService.fetchData(0, 10).then((extraData) => {
+            // setData((current) => [...current, ...extraData]) ❌
             loadData(extraData)
         });
     }, []);
