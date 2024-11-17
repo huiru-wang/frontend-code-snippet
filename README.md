@@ -5,8 +5,8 @@
 - [02-react-hook-useState](#02-react-hook-useState)
 - [06-react-hook-useEffect](#06-react-hook-useEffect)
 
-## 00-project-basic
-### 初始化
+# 00-project-basic
+## 1. 初始化一个项目
 ```shell
 pnpm init
 ```
@@ -26,7 +26,7 @@ pnpm init
 }
 ```
 
-### 使用vite
+## 2. 使用vite
 1. 引入开发依赖 `vite`
 ```shell
 pnpm add vite @vitejs/plugin-react -D
@@ -62,7 +62,7 @@ export default defineConfig({
 ```
 
 
-### React + TypeScript
+## 3. 引入React和TypeScript
 
 引入依赖`react`、`react-dom` 和 开发依赖`@types/react`、`@types/react-dom`
 ```shell
@@ -98,7 +98,7 @@ pnpm add @types/react @types/react-dom -D
 }
 ```
 
-### 配置TypeScript
+## 4. 配置TypeScript
 
 通过3个文件配置TypeScript，通过`"include": [""]` 指定配置范围
 - `tsconfig.json`: 根配置文件
@@ -168,7 +168,7 @@ pnpm add @types/react @types/react-dom -D
 }
 ```
 
-### 配置项目入口
+## 5. 配置项目入口，并启动项目
 
 1. 新建`index.html`，作为入口
 ```html
@@ -230,7 +230,7 @@ pnpm dev
     |- vite.config.ts
 ```
 
-### 使用`Postcss` 和 `Tailwind CSS`
+## 6. 使用`Postcss` 和 `Tailwind CSS`
 1. 安装开发依赖
 ```shell
 pnpm add postcss postcss-loader tailwindcss autoprefixer -D
@@ -285,7 +285,7 @@ createRoot(document.getElementById('root')!).render(
 
 
 
-## 01-react-basic
+# 01-react-basic
 
 ```shell
 src/
@@ -304,7 +304,7 @@ src/
 index.html
 ```
 
-### 父子组件传递props
+## 1. 父子组件传递props
 ```tsx
 // 父组件 传递props
 const App: React.FC<{}> = () => {
@@ -365,7 +365,7 @@ export const BlogList: React.FC<BlogListProps> = ({ blogs, like }) => {
 }
 ```
 
-### routes
+## 2. routes
 
 1. 引入路由组件
 ```shell
