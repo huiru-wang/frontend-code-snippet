@@ -8,6 +8,8 @@
 # 00-project-basic
 ## 1. 初始化一个项目
 ```shell
+mkdir 00-project-basic
+cd 00-project-basic
 pnpm init
 ```
 
@@ -371,12 +373,10 @@ export const BlogList: React.FC<BlogListProps> = ({ blogs, like }) => {
 ```shell
 pnpm add react-router-dom@6
 ```
-```tsx
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-```
 
 2. 使用路由
 ```tsx
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 // 声明路由path和对应绑定的组件，当前路由匹配成功，则渲染对应的组件
 const App: React.FC<{}> = () => {
@@ -524,7 +524,6 @@ export const InfiniteScrollFeed: React.FC = () => {
 ```tsx
 export const DataService = {
     async fetchData(cursor: number, pageSize: number): Promise<FeedItem[]> {
-        console.log(cursor, pageSize);
 
         const delay = Math.floor(Math.random() * 1000) + 1000; // 1000ms 到 2000ms 之间的随机延迟
         await new Promise(resolve => setTimeout(resolve, delay));
