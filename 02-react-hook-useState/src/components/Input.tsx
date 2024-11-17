@@ -7,6 +7,7 @@ interface InputProps {
 }
 
 export const Input: React.FC<InputProps> = ({ value, onChange }) => {
+
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.value);
     };

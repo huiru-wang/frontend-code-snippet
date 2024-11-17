@@ -1,11 +1,11 @@
 import './App.css'
-import { TodoList } from './components/TodoList'
+import { InfiniteScrollFeed } from './components/InfiniteScrollFeed'
 
 function App() {
 
   return (
     <>
-      <TodoList />
+      <InfiniteScrollFeed />
     </>
   )
 }

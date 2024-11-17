@@ -5,6 +5,7 @@ import { Switch } from './components/Swtich';
 import { Form } from './components/Form';
 
 function App() {
+
   // int useState
   const [count, setCount] = useState<number>(0);
 
@@ -34,7 +35,9 @@ function App() {
   // object useState
   // 你需要返回新的对象，否则不会触发更新
   // 如果要修改部分值，可考虑：解构、Object.assign()
-  const [formData, setFormData] = useState<{ username: string, email: string }>({ username: 'hi', email: 'hi@gmail.com' });
+  const [formData, setFormData] = useState<{ username: string, email: string }>(
+    { username: 'hi', email: 'hi@gmail.com' }
+  );
 
   return (
     <>

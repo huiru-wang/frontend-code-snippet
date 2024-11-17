@@ -1,5 +1,4 @@
-export interface TodoItem {
+export interface FeedItem {
     id: number,
     content: string,
-    completed: boolean
 }
