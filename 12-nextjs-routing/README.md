@@ -48,9 +48,9 @@ app/
 
 ## 0. 项目结构
 
-后续
-Layout：会以div包裹的样式出现；
-page：会以卡片的样式出现；
+`Layout`：会以div包裹的样式来演示；
+
+`page`：会以卡片的样式出现；
 
 ```shell
 12-nextjs-routing
@@ -87,9 +87,9 @@ page：会以卡片的样式出现；
 
 `Root Layout`将会在整个应用中，作为所有路由的根布局，它将包含整个页面的公共部分，例如导航栏、页脚等。
 
-在这里使用一个简单的带有边框的div来表示根UI在路由过程中的存在
+在这里使用一个简单的带有边框的`div`来表示根UI在路由过程中的存在
 
-`Root Page`将作为首页
+`Root Page`将作为首页展示
 
 ```ts
 export default function RootLayout({
@@ -134,7 +134,7 @@ export default function RootPage() {
 }
 ```
 
-访问：http://localhost:3000/，可以路由到`page.tsx`
+访问：[http://localhost:3000](http://localhost:3000)，可以路由到`page.tsx`
 
 ## 2. 嵌套路由：dashboard
 
@@ -194,7 +194,7 @@ export default function Dashboard() {
 }
 ```
 
-访问：http://localhost:3000/dashboard，可以路由到`/dashboard/page.tsx`
+访问：[http://localhost:3000/dashboard](http://localhost:3000/dashboard)，可以路由到`/dashboard/page.tsx`
 
 并且可以看到 `Root Layout` 和 `Dashboard Layout` 都被渲染，形成嵌套结构
 
