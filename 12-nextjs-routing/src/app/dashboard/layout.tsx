@@ -28,14 +28,16 @@ export default function RootLayout({
                         className={
                             `${/^\/dashboard\/profile/.test(pathname) ? "text-gray-200 border-b-2" : "text-rose-400"}`
                         }
-                        href="/dashboard/profile">
+                        href="/dashboard/profile"
+                    >
                         profile
                     </Link>
                     <Link
                         className={
                             `${/^\/dashboard\/settings/.test(pathname) ? "text-gray-200 border-b-2" : "text-rose-400"} `
                         }
-                        href="/dashboard/settings">
+                        href="/dashboard/settings"
+                    >
                         settings
                     </Link>
                 </div>
