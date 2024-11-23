@@ -1,6 +1,6 @@
-# 20-nextjs-basic
+# 24-nextjs-parallel-routes
 
-## 7. Parallel Routes
+## Parallel Routes
 
 平行路由：文件夹以@开头，则认为是平行路由，此文件夹不会被识别为路由段。其子孙文件夹会被识别为路由段
 

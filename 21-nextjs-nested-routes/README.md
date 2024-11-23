@@ -1,4 +1,4 @@
-# 20-nextjs-basic
+# 21-nextjs-nested-routes
 
 ## 1. 创建项目
 ```shell
@@ -10,47 +10,26 @@ Progress: resolved 1, reused 1, downloaded 0, added 1, done
 √ Would you like to use Turbopack for next dev? ... No / Yes
 ```
 
-## 2. Nextjs的文件夹和文件
+## 2. 嵌套路由
 
 1. 约定大于配置
 2. 可提高代码的可读性和可维护性
 3. 方便布局的共享和嵌套
 
-### 文件夹：路由和组织页面；
-- 路由：Nextjs通过文件夹实现约定路由；每一级文件夹都是一个路由segment；
+创建`dashboard`文件夹、`dashboard/profile`文件夹、`dashboard/settings`文件夹
 ```shell
-app/
-  |-- dashboard/ 
-  |       |-- page.tsx            localhost:3000/dashboard
-  |       |-- profile/
-  |       |    |-- page.tsx       localhost:3000/dashboard/profile
-  |       |-- settings/
-  |       |    |-- page.tsx       localhost:3000/dashboard/settings
-  |-- page.tsx                    localhost:3000/
+app/      
+    |-- page.tsx                    localhost:3000
+    |-- layout.tsx
+    |-- dashboard/ 
+    |       |-- layout.tsx
+    |       |-- page.tsx            localhost:3000/dashboard
+    |       |-- profile/
+    |       |    |-- page.tsx       localhost:3000/dashboard/profile
+    |       |-- settings/
+    |       |    |-- page.tsx       localhost:3000/dashboard/settings
+
 ```
-
-### 文件：对应路由的UI及约定的特殊文件
-
-Nextjs中每个文件夹下的特殊名字的文件有这不同的默认功能：
-
-```shell
-app/
-  |-- layout.tsx       
-  |-- template.tsx       
-  |-- page.tsx       
-  |-- loading.tsx
-  |-- not-found.tsx
-  |-- error.tsx
-  |-- global-error.tsx
-  |-- route.tsx
-  |-- default.tsx
-```
-- `layout.tsx`：共享布局，嵌套（包装）此目录下的UI，在children切换时，仍保留layout内的状态；
-- `template.tsx`：类似于layout，但当children切换时，不保留状态；
-- `page.tsx`：当前路由段的UI
-- `loading.tsx`：在页面过渡或数据获取过程中提供视觉反馈，自动嵌套当前路径及子路由的UI，当路由切换时，自动显示；
-- `not-found.tsx`：当找不到对应的路由时，返回此UI；
-- `error.tsx`：A Fallback UI，当出现未捕获处理的错误时，显示此UI；
 
 ## 3. 实现RootLayout和RootPage
 
@@ -105,29 +84,12 @@ export default function RootPage() {
 
 访问：[http://localhost:3000](http://localhost:3000)，可以路由到`page.tsx`
 
-## 4. 基于文件系统的路由
-
-创建`dashboard`文件夹、`dashboard/profile`文件夹、`dashboard/settings`文件夹
-```shell
-app/      
-    |-- page.tsx                    localhost:3000
-    |-- layout.tsx
-    |-- dashboard/ 
-    |       |-- layout.tsx
-    |       |-- page.tsx            localhost:3000/dashboard
-    |       |-- profile/
-    |       |    |-- page.tsx       localhost:3000/dashboard/profile
-    |       |-- settings/
-    |       |    |-- page.tsx       localhost:3000/dashboard/settings
-
-```
-
-## 5. Link And Navigating
+## 4. Link And Navigating
 
 修改 `dashboard/layout.tsx`，添加2个Link导航，简单使用tailwindcss修饰一下，分别导航到`/dashboard/profile`和`/dashboard/settings`
 
 
-## 6. metadata
+## 5. metadata
 
 为每个页面添加元数据，以提供SEO优化和用户体验
 
