@@ -20,7 +20,7 @@
 
     React Hooks的使用：useEffect，以Feed流的加载和滚动fetch为例介绍useEffect的使用
 
-- [12-nextjs-routing](https://github.com/huiru-wang/react-code-snippet/tree/main/12-nextjs-routing#12-nextjs-routing)
+- [20-nextjs-basic](https://github.com/huiru-wang/react-code-snippet/tree/main/12-nextjs-routing#12-nextjs-routing)
 
     Next.js 路由的使用
 
