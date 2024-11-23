@@ -1,4 +1,4 @@
-# 12-nextjs-routing
+# 20-nextjs-basic
 
 ## Nextjs的文件夹和文件
 
@@ -52,7 +52,7 @@ app/
 `Layout`：会以div包裹的样式来演示；
 
 ```shell
-12-nextjs-routing
+20-nextjs-basic
     |-- app/      
           |-- about/
           |       |-- page.tsx 
@@ -138,7 +138,7 @@ export default function RootPage() {
 ## 2. 嵌套路由：dashboard
 
 ```shell
-12-nextjs-routing
+20-nextjs-basic
     |-- app/      
           |-- dashboard/ 
           |       |-- layout.tsx 
@@ -200,7 +200,7 @@ export default function Dashboard() {
 ## 3. Link And Navigating
 
 ```shell
-12-nextjs-routing
+20-nextjs-basic
     |-- app/      
           |-- dashboard/ 
           |       |-- profile/
@@ -298,7 +298,7 @@ export default function RootLayout({
 当访问`/dashboard/monitor`，会抛出异常，此时会触发`error.tsx`，并且会渲染`error.tsx`
 
 ```shell
-12-nextjs-routing
+20-nextjs-basic
     |-- app/      
           |-- dashboard/ 
           |       |-- monitor/
@@ -363,7 +363,7 @@ export default function RootError({
 SSR友好：根据动态参数，可以完全由服务端直接生成UI；
 
 ```shell
-12-nextjs-routing
+20-nextjs-basic
     |-- app/      
         |-- posts/ 
         |    |-- [id]/
@@ -437,7 +437,7 @@ export const ApiService = {
 loading.tsx 是一个特殊的路由组件，当路由切换、数据异步加载、组件渲染中时，Next.js 会自动渲染 loading.tsx，从而实现loading效果;
 
 ```shell
-12-nextjs-routing
+20-nextjs-basic
     |-- app/      
         |-- loading.tsx
 ```
