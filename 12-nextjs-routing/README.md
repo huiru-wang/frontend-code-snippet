@@ -2,12 +2,10 @@
 
 ## Nextjs的文件夹和文件
 
-
 ### 文件夹：路由和组织页面；
 - 路由：Nextjs通过文件夹实现约定路由；每一级文件夹都是一个路由segment；
 ```shell
 app/
-  |-- page.tsx                    localhost:3000/
   |-- about/
   |       |-- page.tsx            localhost:3000/about
   |-- dashboard/ 
@@ -19,6 +17,7 @@ app/
   |-- posts/
   |       |- [id]/
   |       |    |- page.tsx        localhost:3000/posts/[id]
+  |-- page.tsx                    localhost:3000/
 ```
 
 
@@ -38,19 +37,19 @@ app/
   |-- route.tsx
   |-- default.tsx
 ```
-- layout：共享布局，嵌套（包装）此目录下的UI，在children切换时，仍保留layout内的状态；
-- template：类似于layout，但当children切换时，不保留状态；
-- page：当前路由段的UI
-- loading：在页面过渡或数据获取过程中提供视觉反馈，自动嵌套当前路径及子路由的UI，当路由切换时，自动显示；
-- not-found(CSR)：当找不到对应的路由时，返回此UI；
-- error：A Fallback UI，当出现未捕获处理的错误时，显示此UI；
+- `layout.tsx`：共享布局，嵌套（包装）此目录下的UI，在children切换时，仍保留layout内的状态；
+- `template.tsx`：类似于layout，但当children切换时，不保留状态；
+- `page.tsx`：当前路由段的UI
+- `loading.tsx`：在页面过渡或数据获取过程中提供视觉反馈，自动嵌套当前路径及子路由的UI，当路由切换时，自动显示；
+- `not-found.tsx`：当找不到对应的路由时，返回此UI；
+- `error.tsx`：A Fallback UI，当出现未捕获处理的错误时，显示此UI；
 
 
 ## 0. 项目结构
 
-`Layout`：会以div包裹的样式来演示；
-
 `page`：会以卡片的样式出现；
+
+`Layout`：会以div包裹的样式来演示；
 
 ```shell
 12-nextjs-routing
@@ -198,7 +197,7 @@ export default function Dashboard() {
 
 并且可以看到 `Root Layout` 和 `Dashboard Layout` 都被渲染，形成嵌套结构
 
-## 3. Link
+## 3. Link And Navigating
 
 ```shell
 12-nextjs-routing
@@ -286,3 +285,171 @@ export default function RootLayout({
     );
 }
 ```
+
+
+## 4. Error Boundary
+
+错误边界（Error Boundaries）是一种用于捕获组件树中 JavaScript 错误的机制。它类似于一个 “安全网”，可以防止错误导致整个应用程序崩溃
+
+当组件树中的某个部分发生错误时，错误边界可以捕获这个错误，并以一种更友好的方式进行处理，比如显示一个备用的 UI 或者记录错误信息
+
+创建文件夹：`monitor`，文件：`/monitor/page.tsx` 和 `dashboard/error.tsx`, 模拟Monitor组件渲染时，直接返回异常
+
+当访问`/dashboard/monitor`，会抛出异常，此时会触发`error.tsx`，并且会渲染`error.tsx`
+
+```shell
+12-nextjs-routing
+    |-- app/      
+          |-- dashboard/ 
+          |       |-- monitor/
+          |       |    |-- page.tsx  
+          |       |-- error.tsx
+          |      
+```
+```ts
+// /monitor/page.tsx
+export default function Monitor() {
+    throw new Error('This is a test error')
+    return null
+}
+```
+
+创建`error.tsx`，作为`/dashboard`的子路由的错误边界，如果`/dashboard/error.tsx`不存在，则寻找上一级的错误边界
+
+```ts
+// /dashboard/error.tsx
+'use client'
+import { useEffect } from 'react'
+
+export default function RootError({
+    error,
+    reset,
+}: {
+    error: Error & { digest?: string }
+    reset: () => void
+}) {
+
+    useEffect(() => {
+        // Log the error to an error reporting service
+        console.error(error)
+    }, [error])
+
+    return (
+        <div className="bg-purple-300 p-8 rounded-lg shadow-md w-1/4 text-center font-mono">
+            <h2 className="text-2xl font-bold mb-6">
+                Error Page
+            </h2>
+            <p className="text-2xl text-gray-600 pb-8">
+                /dashboard/error.tsx
+            </p>
+            <button
+                onClick={
+                    // Attempt to recover by trying to re-render the segment
+                    () => reset()
+                }
+            >
+                Try again For Dashboard ErrorHandle
+            </button>
+        </div>
+    )
+}
+```
+
+
+## 5. Dynamic Routes
+
+动态路由：路由段可以是一个参数，根据参数，返回不同的UI。基于文件系统路由则需要将一个文件夹变为可接受参数；即文件名命名为:[param]，因此segment就变为：/posts/[id]
+
+SSR友好：根据动态参数，可以完全由服务端直接生成UI；
+
+```shell
+12-nextjs-routing
+    |-- app/      
+        |-- posts/ 
+        |    |-- [id]/
+        |    |    |-- page.tsx
+    |-- lib/
+        |-- api.ts
+        |-- data.ts
+        |-- types.ts
+```
+
+当访问：`/posts/1`，会渲染`/posts/[id]/page.tsx`，并传递组件参数：`params.id = 1`
+
+创建一个SSR的`page.tsx`
+
+```tsx
+'use server'
+import { ApiService } from '@/lib/api'
+import Link from 'next/link'
+
+export default async function PostPage({ params }: { params: { id: string } }) {
+
+    // 确保 params 被 await 处理
+    const { id } = await params;
+
+    const post = await ApiService.fetchPosts(id)
+
+    return (
+        <article className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
+            <h1 className="text-2xl font-bold mb-4"> Dynamic Routing : /posts/[id]/page.tsx</h1>
+            <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
+            <p className="text-gray-700 mb-6">{post.content}</p>
+            <div className="border-t pt-4">
+                <p className="text-sm text-gray-500">Post ID: {post.id}</p>
+            </div>
+            <br />
+            <Link className="border-2 bg-slate-200" href="/">Back to Home</Link>
+        </article>
+    )
+}
+```
+
+额外创建一个lib文件夹，放置type、mock的数据、api接口等文件
+```ts
+// lib/api.ts
+import { posts } from "./data";
+import type { Post } from "./types";
+
+export const ApiService = {
+    async fetchPosts(id: string): Promise<Post> {
+        try {
+            // 模拟耗时，后面用于显示loading
+            await new Promise(resolve => setTimeout(resolve, 1000))
+            if (!/^\d+$/.test(id)) {
+                return { id: 0, title: 'not found', content: 'not found' };
+            }
+            const idNum = parseInt(id)
+            const post = posts.find(post => post.id === idNum)
+            if (post) {
+                return post
+            }
+        } catch (error) {
+            console.error('Failed to fetch data:', error);
+        }
+        return { id: 0, title: 'not found', content: 'not found' }
+    }
+}
+```
+
+## 6. loading
+
+loading.tsx 是一个特殊的路由组件，当路由切换、数据异步加载、组件渲染中时，Next.js 会自动渲染 loading.tsx，从而实现loading效果;
+
+```shell
+12-nextjs-routing
+    |-- app/      
+        |-- loading.tsx
+```
+
+```tsx
+'use client'
+export default function Loading() {
+    return (
+        <div className="max-w-2xl mx-auto p-6">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-orange-700"></div>
+        </div>
+    )
+}
+```
+

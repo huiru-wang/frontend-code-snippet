@@ -1,6 +1,4 @@
 'use client'
-import { Suspense } from "react";
-import Loading from "../loading";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -40,13 +38,19 @@ export default function RootLayout({
                     >
                         settings
                     </Link>
+                    <Link
+                        className={
+                            `${/^\/dashboard\/monitor/.test(pathname) ? "text-gray-200 border-b-2" : "text-rose-400"} `
+                        }
+                        href="/dashboard/monitor"
+                    >
+                        monitor
+                    </Link>
                 </div>
             </div>
 
             <div className="flex flex-row justify-center items-center min-h-96">
-                <Suspense fallback={<Loading />}>
-                    {children}
-                </Suspense>
+                {children}
             </div>
         </div>
     );
