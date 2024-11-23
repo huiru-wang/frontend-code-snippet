@@ -4,6 +4,7 @@
 
 每个模块以一个简单的例子来进行学习，每个项目的README，会进行一些记录和描述
 
+## React
 - [00-project-basic](https://github.com/huiru-wang/react-code-snippet/tree/main/00-project-basic#00-project-basic)
     
     项目的工程创建及结构目录
@@ -20,7 +21,26 @@
 
     React Hooks的使用：useEffect，以Feed流的加载和滚动fetch为例介绍useEffect的使用
 
-- [20-nextjs-basic](https://github.com/huiru-wang/react-code-snippet/tree/main/20-nextjs-basic#20-nextjs-basic)
+## Next.js
+- [21-nextjs-nested-routes](https://github.com/huiru-wang/react-code-snippet/tree/main/21-nextjs-nested-routes#21-nextjs-nested-routes)
 
-    Next.js 路由的使用
+    Next.js 项目初始化和嵌套路由
+
+- [23-nextjs-dynamic-routes](https://github.com/huiru-wang/react-code-snippet/tree/main/23-nextjs-dynamic-routes#23-nextjs-dynamic-routes)
+
+    Next.js 动态路由
+
+- [24-nextjs-parallel-routes](https://github.com/huiru-wang/react-code-snippet/tree/main/24-nextjs-parallel-routes#24-nextjs-parallel-routes)
+
+    Next.js 平行路由
+
+- [25-nextjs-intercepting-routes](https://github.com/huiru-wang/react-code-snippet/tree/main/25-nextjs-intercepting-routes)
+
+    Next.js 拦截路由
+
+- [26-nextjs-pages](https://github.com/huiru-wang/react-code-snippet/tree/main/26-nextjs-pages#26-nextjs-pages)
+
+    Next.js 特殊文件
+
+
 
