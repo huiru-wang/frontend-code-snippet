@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "server": "tsx watch src/server/server.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -12,12 +11,11 @@
   "dependencies": {
     "@hono/node-server": "^1.13.7",
     "@hono/zod-validator": "^0.4.1",
-    "dotenv": "^16.4.5",
     "hono": "^4.6.11",
-    "mongodb": "^6.11.0",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",
