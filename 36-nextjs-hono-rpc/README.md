@@ -1,105 +1,92 @@
-# 35-nextjs-hono
+# 36-nextjs-hono-rpc
 
 ## 1. 项目创建
 
-创建Next.js
+沿用`35-nextjs-hono`的项目结构
+
+
+## 2. RPC
+
+RPC功能允许服务器和客户端之间共享API规范。
+
+
+## 3. 调整项目结构并创建更多route
+
+创建`src/server`
 ```shell
-pnpm dlx create-next-app@latest --ts --tailwind --eslint --app --src-dir --use-pnpm --import-alias "@/*"
+src/
+  |--app/
+  |    |-- api/
+  |        |-- [[...route]]
+  |                |-- route.ts
+  |--server/
+      |-- main.ts
+      |-- books.ts
+      |-- authors.ts
+
 ```
 
-引入hono
-```shell
-pnpm add hono
-```
-
-## 2. 配置route handler
-
-将Next.js所有route handler 由hono代理
-
-创建目录：
-```shell
-app/
-  |-- api/
-       |-- [[...route]]
-                |-- route.ts
-```
-
+分离不同的route到其他文件：
 ```ts
+// authors.ts
 import { Hono } from 'hono'
-import { handle } from 'hono/vercel'
 
-export const runtime = 'edge'
+const app = new Hono()
 
-// 将Next.js的所有route handler 由Hono处理
-const app = new Hono().basePath('/api')
+app.get('/', (c) => c.json('list authors'))
+app.post('/', (c) => c.json('create an author', 201))
+app.get('/:id', (c) => c.json(`get ${c.req.param('id')}`))
 
-app
-    .get('/', (c) => {
-        return c.json({
-            message: 'Hello Next.js and Vercel!',
-        })
-    })
-    .get('/:id', (c) => {
-        const id = c.req.param('id');
-        return c.text(`Hello ${id}!`)
-    })
-    .post('/create', (c) => {
-        return c.text('POST')
-    })
+export default app
+```
+```ts
+// books.ts
+import { Hono } from 'hono'
 
-// 暴露GET、POST
-export const GET = handle(app)
-export const POST = handle(app)
+const app = new Hono()
+
+app.get('/', (c) => c.json('list books'))
+    .post('/', (c) => c.json('create a book', 201))
+    .get('/:id', (c) => c.json(`get ${c.req.param('id')}`))
+
+export default app
 ```
 
-启动项目，并访问：http://localhost:3000/api
+挂载所有router，并暴露app、RPC规范
+```ts
+// main.ts
+import { Hono } from 'hono'
+import authors from './authors'
+import books from './books'
 
-## 3. 运行时
+// 保持和nextjs的api路径一致
+const app = new Hono().basePath("api")
 
-`export const runtime = 'edge'`是指定运行环境为：`Edge Function`，时Vercel的无服务器函数；
+const routes = app.route('/authors', authors).route('/books', books)
 
-
-## 3. 引入zod
-
-```shell
-pnpm add zod @hono/zod-validator
+export default app
+export type AppType = typeof routes
 ```
+
+
+## 4. 在Nextjs中引入hono
+
+Nextjs的所有路由的所有请求方法都通过hono进行代理
 
 ```ts
-import { zValidator } from '@hono/zod-validator'
-import { z } from 'zod'
+// src/app/api/[[...route]]/route.ts
+import { handle } from 'hono/vercel';
+import app from '@/server/main';
 
-// ...
-
-app.get('/post/:id', zValidator("param", z.object({ id: z.coerce.number() })), (c) => {
-        const id = c.req.param('id');
-        return c.text(`Hello Post ${id}!`)
-    })
-
-// ...
+export const GET = handle(app);
+export const POST = handle(app);
+export const PUT = handle(app);
+export const PATCH = handle(app);
+export const DELETE = handle(app);
+export const OPTIONS = handle(app);
+export const HEAD = handle(app);
 ```
 
-访问：http://localhost:3000/api/post/1，正常；
-访问：http://localhost:3000/api/post/a，报错:
-```json
-{
-    "success": false,
-    "error": {
-        "issues": [
-            {
-                "code": "invalid_type",
-                "expected": "number",
-                "received": "nan",
-                "path": [
-                    "id"
-                ],
-                "message": "Expected number, received nan"
-            }
-        ],
-        "name": "ZodError"
-    }
-}
-```
-
-
+## 5. 测试
+启动项目，访问：http://localhost:3000/api/books
 
