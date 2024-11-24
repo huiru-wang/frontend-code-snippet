@@ -53,3 +53,7 @@
 - [35-nextjs-hono](https://github.com/huiru-wang/frontend-code-snippet/tree/main/35-nextjs-hono#35-nextjs-hono)
 
     Next.js + hono，Nextjs的route handler由hono代理
+
+- [36-nextjs-hono-rpc](https://github.com/huiru-wang/frontend-code-snippet/tree/main/36-nextjs-hono-rpc#36-nextjs-hono-rpc)
+
+    Next.js + hono，将hono的服务端代理单独放在`src/server`中，更好管理项目结构
