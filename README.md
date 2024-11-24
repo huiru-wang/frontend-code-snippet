@@ -42,5 +42,7 @@
 
     Next.js 特殊文件
 
+- [27-nextjs-route-handler](https://github.com/huiru-wang/react-code-snippet/tree/main/27-nextjs-route-handler#27-nextjs-route-handler)
 
+    Next.js Route Handler: 服务端接口和中间件使用
 
