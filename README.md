@@ -46,3 +46,6 @@
 
     Next.js Route Handler: 服务端接口和中间件使用
 
+- [30-nextjs-prisma](https://github.com/huiru-wang/react-code-snippet/tree/main/30-nextjs-prisma#30-nextjs-prisma)
+
+    Next.js + Prisma
