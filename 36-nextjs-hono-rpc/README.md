@@ -87,6 +87,61 @@ export const OPTIONS = handle(app);
 export const HEAD = handle(app);
 ```
 
-## 5. 测试
+
 启动项目，访问：http://localhost:3000/api/books
+
+
+## 5. 使用hono/client
+
+使得Nextjs可以以RPC方式访问hono服务
+
+创建`lib/hono-client.ts`
+
+```shell
+src/
+  |--app/
+  |    |-- api/
+  |        |-- [[...route]]
+  |                |-- route.ts
+  |--lib/
+      |-- hono-client.ts
+  |--server/
+      |-- main.ts
+      |-- books.ts
+      |-- authors.ts
+
+```
+
+```ts
+import { AppType } from '@/server/main'
+import { hc } from 'hono/client'
+
+export const client = hc<AppType>(process.env.NEXT_PUBLIC_APP_URL!);
+```
+
+创建.env
+```env
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+在`src/app/page.tsx`中使用hono-client，访问后端服务
+
+```tsx
+import { client } from "@/lib/hono-client";
+
+export default async function Home() {
+
+  // 根据AppType，访问books相关RPC服务
+  const response = await client.api.books.$get();
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return (
+    <div>
+      <h1>Get books from hono：{response.json()}</h1>
+    </div>
+  );
+}
+```
 
