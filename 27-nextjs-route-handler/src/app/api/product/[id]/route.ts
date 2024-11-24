@@ -6,6 +6,6 @@ export async function GET(
 ) {
     const id = (await params).id;
 
-    const data = { id: id, time: new Date() };
+    const data = { id: id, time: new Date().toLocaleDateString() };
     return NextResponse.json(data);
 }

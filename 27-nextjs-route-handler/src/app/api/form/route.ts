@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 
+// static GET method
+export async function GET() {
+    return NextResponse.json({ message: "hi", time: new Date().toLocaleDateString() })
+}
+
 /**
  * 表单数据获取
  */
