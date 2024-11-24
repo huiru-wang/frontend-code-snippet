@@ -49,3 +49,7 @@
 - [30-nextjs-prisma](https://github.com/huiru-wang/frontend-code-snippet/tree/main/30-nextjs-prisma#30-nextjs-prisma)
 
     Next.js + Prisma
+
+- [35-nextjs-hono](https://github.com/huiru-wang/frontend-code-snippet/tree/main/35-nextjs-hono#35-nextjs-hono)
+
+    Next.js + hono，Nextjs的route handler由hono代理
