@@ -20,4 +20,4 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
     );
 };
 
-export default ProductList;
+export default React.memo(ProductList);
