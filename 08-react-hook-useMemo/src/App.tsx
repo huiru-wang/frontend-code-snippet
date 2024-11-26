@@ -1,31 +1,31 @@
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import './App.css'
 import FilterBar from './components/FilterBar'
 import ProductList from './components/ProductList'
 import { productData } from './lib/data'
 import { Product } from './lib/types'
-import { ThemeButton } from './components/ThemeButton'
-import { ThemeContext } from './context/ThemeContext'
 
 function App() {
 
   console.log("App rendered");
 
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products] = useState<Product[]>(productData);
   const [minPrice, setMinPrice] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(1000);
   const [keyword, setKeyword] = useState<string>('');
-  const { theme } = useContext(ThemeContext)
 
-  useEffect(() => {
-    setProducts(productData);
-  }, [])
+  const [count, setCount] = useState(0);
+
+  const xxx = () => {
+    console.log("xxxxxxxx");
+
+  }
 
   /**
    * 缓存过滤后的商品列表
    */
   const filteredProducts = useMemo(() => {
-    // 重新计算的时机
+
     console.log('Compute filteredProducts');
 
     return products.filter(product => {
@@ -49,10 +49,12 @@ function App() {
   };
 
   return (
-    <div className={`container-${theme}`}>
+    <div className='container'>
 
-      {/* 切换Product的卡片主题，不会触发组件的重新渲染 */}
-      <ThemeButton />
+      {/* 执行count 不触发 filteredProducts的计算 */}
+      <div>
+        <button onClick={() => setCount(count + 1)}>Count: {count}</button>
+      </div>
 
       <FilterBar
         minPrice={minPrice}

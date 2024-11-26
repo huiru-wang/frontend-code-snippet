@@ -5,5 +5,3 @@ export interface Product {
     price: number;
     description: string;
 }
-
-export type Theme = 'light' | 'dark';

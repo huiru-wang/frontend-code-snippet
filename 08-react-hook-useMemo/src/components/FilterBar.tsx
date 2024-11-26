@@ -47,4 +47,3 @@ const FilterBar: React.FC<FilterBarProps> = ({ minPrice, maxPrice, keyword, onMi
 };
 
 export default React.memo(FilterBar);
-// export default FilterBar;
