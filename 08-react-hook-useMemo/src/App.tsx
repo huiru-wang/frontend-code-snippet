@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import './App.css'
 import FilterBar from './components/FilterBar'
 import ProductList from './components/ProductList'
@@ -16,15 +16,10 @@ function App() {
 
   const [count, setCount] = useState(0);
 
-  const xxx = () => {
-    console.log("xxxxxxxx");
-
-  }
-
   /**
    * 缓存过滤后的商品列表
    */
-  const filteredProducts = useMemo(() => {
+  const filteredProducts = useCallback(() => {
 
     console.log('Compute filteredProducts');
 
@@ -64,7 +59,9 @@ function App() {
         onMaxPriceChange={onMaxPriceChange}
         onSearchKeywordChange={onSearchKeywordChange}
       />
-      <ProductList products={filteredProducts} />
+
+      <ProductList products={filteredProducts()} />
+
     </div>
   )
 }
