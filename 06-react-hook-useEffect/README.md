@@ -1,5 +1,17 @@
 # 06-react-hook-useEffect
 
+```ts
+useEffect(() => {
+    // do something
+
+    // clean up
+    return (() => {})
+}, [dependencies])
+```
+- 当dependencies变化时(浅比较)，执行回调函数；dependencies为空则组件初始化时执行一次；
+- 谨防内存泄漏：如果回调函数涉及订阅事件、定时器等，使用return来返回一个回调函数，用于清理；
+
+
 通过实现一个监听滚动条来从服务端加载数据流的组件，学习useEffect
 1. 信息流组件容器实现；
 2. 组件初始化时，获取第一批数据；
