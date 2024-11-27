@@ -1,69 +1,43 @@
-import { useCallback, useMemo, useState } from 'react'
-import './App.css'
-import FilterBar from './components/FilterBar'
-import ProductList from './components/ProductList'
-import { productData } from './lib/data'
-import { Product } from './lib/types'
+import React, { useState, useMemo } from 'react';
 
-function App() {
+const NumberList = () => {
+  const [numbers, setNumbers] = useState([1, 2, 3, 4, 5]);
+  const [newNumber, setNewNumber] = useState(0);
 
-  console.log("App rendered");
-
-  const [products] = useState<Product[]>(productData);
-  const [minPrice, setMinPrice] = useState<number>(0);
-  const [maxPrice, setMaxPrice] = useState<number>(1000);
-  const [keyword, setKeyword] = useState<string>('');
-
-  const [count, setCount] = useState(0);
-
-  /**
-   * 缓存过滤后的商品列表
-   */
-  const filteredProducts = useCallback(() => {
-
-    console.log('Compute filteredProducts');
-
-    return products.filter(product => {
-      const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
-      const matchesSearch = product.name.toLowerCase().includes(keyword.toLowerCase());
-      return matchesPrice && matchesSearch;
-    });
-
-  }, [products, minPrice, maxPrice, keyword]);
-
-  const onMinPriceChange = (min: number) => {
-    setMinPrice(min);
+  // 计算总和的函数
+  const calculateSum = () => {
+    let sum = 0;
+    for (let num of numbers) {
+      sum += num;
+    }
+    return sum;
   };
 
-  const onMaxPriceChange = (max: number) => {
-    setMaxPrice(max);
-  };
+  // 使用useMemo记忆计算结果
+  const sum = useMemo(() => calculateSum(), [numbers]);
 
-  const onSearchKeywordChange = (keyword: string) => {
-    setKeyword(keyword);
+  const addNumber = () => {
+    // 向列表中添加一个新数字
+    setNumbers([...numbers, newNumber]);
   };
 
   return (
-    <div className='container'>
-
-      {/* 执行count 不触发 filteredProducts的计算 */}
-      <div>
-        <button onClick={() => setCount(count + 1)}>Count: {count}</button>
-      </div>
-
-      <FilterBar
-        minPrice={minPrice}
-        maxPrice={maxPrice}
-        keyword={keyword}
-        onMinPriceChange={onMinPriceChange}
-        onMaxPriceChange={onMaxPriceChange}
-        onSearchKeywordChange={onSearchKeywordChange}
+    <div>
+      <h1>数字列表总和</h1>
+      <ul>
+        {numbers.map((num, index) => (
+          <li key={index}>{num}</li>
+        ))}
+      </ul>
+      <p>总和: {sum}</p>
+      <input
+        type="number"
+        value={newNumber}
+        onChange={(e) => setNewNumber(Number(e.target.value))}
       />
-
-      <ProductList products={filteredProducts()} />
-
+      <button onClick={addNumber}>添加数字</button>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default NumberList;

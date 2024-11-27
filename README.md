@@ -21,6 +21,10 @@
 
     React Hooks的使用：useEffect，以Feed流的加载和滚动fetch为例介绍useEffect的使用
 
+- [10-react-hook-useEffect](https://github.com/huiru-wang/frontend-code-snippet/tree/main/06-react-hook-useEffect#06-react-hook-useeffect)
+
+    React Hooks的使用：useEffect，以Feed流的加载和滚动fetch为例介绍useEffect的使用
+
 ## Next.js
 - [21-nextjs-nested-routes](https://github.com/huiru-wang/frontend-code-snippet/tree/main/21-nextjs-nested-routes#21-nextjs-nested-routes)
 
