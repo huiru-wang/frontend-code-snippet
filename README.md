@@ -5,17 +5,14 @@
 每个模块以一个简单的例子来进行学习，每个项目的README，会进行一些记录和描述
 
 ## React
-- [00-project-basic](https://github.com/huiru-wang/frontend-code-snippet/tree/main/00-project-basic#00-project-basic)
+- [02-react-basic](https://github.com/huiru-wang/frontend-code-snippet/tree/main/02-react-basic#02-react-basic)
     
-    项目的工程创建及结构目录
+    - 项目的工程创建
+    - React-useState
 
-- [01-react-basic](https://github.com/huiru-wang/frontend-code-snippet/tree/main/01-react-basic#01-react-basic)
+- [03-react-route](https://github.com/huiru-wang/frontend-code-snippet/tree/main/03-react-route#03-react-route)
 
     React 基础操作：组件、props、路由
-
-- [02-react-hook-useState](https://github.com/huiru-wang/frontend-code-snippet/tree/main/02-react-hook-useState#02-react-hook-usestate)
-
-    React Hooks的使用：不同的数据类型的useState的使用和注意事项
 
 - [06-react-hook-useEffect](https://github.com/huiru-wang/frontend-code-snippet/tree/main/06-react-hook-useEffect#06-react-hook-useeffect)
 
