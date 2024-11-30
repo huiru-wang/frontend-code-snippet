@@ -6,10 +6,10 @@
 ## Basic
 - JS Basic
     - [JS Function](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/01-JS-Function.md#JavaScriptFunction)
-    - [JS Prototypes](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/01-JS-Prototypes.md#JavaScriptFunction)
-    - [JS Async](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/01-JS-Async.md#Async)
+    - [JS Prototypes](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/02-JS-Prototypes.md#prototypes)
+    - [JS Async](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/03-JS-Async.md#async)
 - TS Basic
-    - [TS Project](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/10-TS.md#TypeScript)
+    - [TS Project](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/10-TS.md#typescript)
 
 - [01-webpack](https://github.com/huiru-wang/frontend-code-snippet/tree/main/01-webpack)
 
