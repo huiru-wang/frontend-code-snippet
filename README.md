@@ -4,19 +4,16 @@
 
 每个模块以一个简单的例子来进行学习，每个项目的README，会进行一些记录和描述
 ## Basic
+- JS Basic
+    - [JS Function](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/01-JS-Function.md#JavaScriptFunction)
+    - [JS Prototypes](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/01-JS-Prototypes.md#JavaScriptFunction)
+    - [JS Async](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/01-JS-Async.md#Async)
+- TS Basic
+    - [TS Project](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/10-TS.md#TypeScript)
 
-- [00-frontend-basic](https://github.com/huiru-wang/frontend-code-snippet/tree/main/00-frontend-basic)
+- [01-webpack](https://github.com/huiru-wang/frontend-code-snippet/tree/main/01-webpack)
 
-    - JS Basic
-        - [JS Function](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/01-JS-Function.md#JavaScriptFunction)
-        - [JS Prototypes](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/01-JS-Prototypes.md#JavaScriptFunction)
-        - [JS Async](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/01-JS-Async.md#Async)
-    - TS Basic
-        - [TS Project](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/10-TS.md#TypeScript)
-- [01-webpack-vite](https://github.com/huiru-wang/frontend-code-snippet/tree/main/01-webpack-vite)
-
-    - Webpack
-    - Vite
+- [01-Vite](https://github.com/huiru-wang/frontend-code-snippet/tree/main/01-vite)
 
 ## React
 - [02-react-basic](https://github.com/huiru-wang/frontend-code-snippet/tree/main/02-react-basic#02-react-basic)
