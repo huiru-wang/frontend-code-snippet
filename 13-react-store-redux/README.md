@@ -5,8 +5,8 @@
 - [4. 创建`Store`](#4-创建store)
 - [5. 使用`Provider`将store注入到组件中](#5-使用provider将store注入到组件中)
 - [6. 通过`Redux Hook`使用`store`](#6-通过redux-hook使用store)
-- [6.1 `useSelector`原理](#61-useselector原理)
-- [6.2 `useDispatch`原理](#62-usedispatch原理)
+  - [6.1 `useSelector`原理](#61-useselector原理)
+  - [6.2 `useDispatch`原理](#62-usedispatch原理)
 
 ![store](../images/10-react-store.png)
 

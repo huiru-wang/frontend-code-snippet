@@ -20,7 +20,7 @@
 - [01-Vite](https://github.com/huiru-wang/frontend-code-snippet/tree/main/01-vite)
 
 ## React
-- [03-react-basic](https://github.com/huiru-wang/frontend-code-snippet/tree/main/05-react-basic#03-react-basic)
+- [05-react-basic](https://github.com/huiru-wang/frontend-code-snippet/tree/main/05-react-basic#05-react-basic)
     
     - 项目的工程创建
     - 父子组件的通信
