@@ -1,4 +1,4 @@
-# 06-react-hook-useEffect
+# 09-react-hook-useEffect
 
 ```ts
 useEffect(() => {

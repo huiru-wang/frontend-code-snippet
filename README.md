@@ -4,34 +4,43 @@
 
 每个模块以一个简单的例子来进行学习，每个项目的README，会进行一些记录和描述
 ## Basic
-- JS Basic
-    - [JS Function](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/01-JS-Function.md#JavaScriptFunction)
-    - [JS Prototypes](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/02-JS-Prototypes.md#prototypes)
-    - [JS Async](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/03-JS-Async.md#async)
-- TS Basic
-    - [TS Project](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/10-TS.md#typescript)
+
+- [JS Function](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/01-JS-Function.md#JavaScriptFunction)
+
+- [JS Prototypes](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/02-JS-Prototypes.md#prototypes)
+
+- [JS Async](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/03-JS-Async.md#async)
+    
+
+- [TS Project](https://github.com/huiru-wang/frontend-code-snippet/blob/main/00-frontend-basic/10-TS.md#typescript)
+   
 
 - [01-webpack](https://github.com/huiru-wang/frontend-code-snippet/tree/main/01-webpack)
 
 - [01-Vite](https://github.com/huiru-wang/frontend-code-snippet/tree/main/01-vite)
 
 ## React
-- [02-react-basic](https://github.com/huiru-wang/frontend-code-snippet/tree/main/02-react-basic#02-react-basic)
+- [03-react-basic](https://github.com/huiru-wang/frontend-code-snippet/tree/main/05-react-basic#03-react-basic)
     
     - 项目的工程创建
-    - React-useState
+    - 父子组件的通信
+    - 路由
 
-- [03-react-route](https://github.com/huiru-wang/frontend-code-snippet/tree/main/03-react-route#03-react-route)
+- [06-react-hook-useState](https://github.com/huiru-wang/frontend-code-snippet/tree/main/06-react-hook-useState#06-react-hook-useState)
 
-    React 基础操作：组件、props、路由
+    React-useState
 
-- [06-react-hook-useEffect](https://github.com/huiru-wang/frontend-code-snippet/tree/main/06-react-hook-useEffect#06-react-hook-useeffect)
+- [09-react-hook-useEffect](https://github.com/huiru-wang/frontend-code-snippet/tree/main/09-react-hook-useEffect#09-react-hook-useEffect)
 
     React Hooks的使用：useEffect，以Feed流的加载和滚动fetch为例介绍useEffect的使用
 
-- [10-react-store-redux](https://github.com/huiru-wang/frontend-code-snippet/tree/main/10-react-store-redux#10-react-store-redux)
+- [13-react-store-redux](https://github.com/huiru-wang/frontend-code-snippet/tree/main/13-react-store-redux#13-react-store-redux)
 
     Redux的简单使用
+
+- [14-react-store-zustand](https://github.com/huiru-wang/frontend-code-snippet/tree/main/14-react-store-zustand#14-react-store-zustand)
+
+    Zustand的简单使用
 
 ## Next.js
 - [21-nextjs-nested-routes](https://github.com/huiru-wang/frontend-code-snippet/tree/main/21-nextjs-nested-routes#21-nextjs-nested-routes)

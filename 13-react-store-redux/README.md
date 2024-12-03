@@ -1,4 +1,4 @@
-# 10-react-store-redux
+# 13-react-store-redux
 - [1. 创建项目并引入Redux依赖](#1-创建项目并引入Redux依赖)
 - [2. 定义并创建`Action`](#2-定义并创建action)
 - [3. 创建`Reducer`](#3-创建reducer)

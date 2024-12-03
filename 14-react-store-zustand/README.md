@@ -1,4 +1,4 @@
-# 11-react-store-zustand
+# 14-react-store-zustand
 
 Zustand 是一个轻量级的状态管理库，适用于 React 应用。它简单易用，提供了灵活的状态管理方案；
 
