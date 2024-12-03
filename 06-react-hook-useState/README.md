@@ -1,4 +1,4 @@
-# 06-react-basic
+# 06-react-hook-useState
 
 ## useState
 
