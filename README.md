@@ -67,7 +67,7 @@
 
     Next.js Route Handler: 服务端接口和中间件使用
 
-- [28-nextjs-mdx](https://github.com/huiru-wang/frontend-code-snippet/tree/main/28-nextjs-mdx#tailwind--mdx)
+- [28-nextjs-mdx](https://github.com/huiru-wang/frontend-code-snippet/tree/main/28-nextjs-mdx#28-nextjs-mdx)
 
     Next.js Mdx TailwindCSS
 
@@ -75,6 +75,6 @@
 
     Next.js + Prisma
 
-- [31-nextjs-hono-rpc](https://github.com/huiru-wang/frontend-code-snippet/tree/main/31-nextjs-hono-rpc#36-nextjs-hono-rpc)
+- [31-nextjs-hono-rpc](https://github.com/huiru-wang/frontend-code-snippet/tree/main/31-nextjs-hono-rpc#31-nextjs-hono-rpc)
 
     Next.js + hono RPC client
