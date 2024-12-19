@@ -1,4 +1,4 @@
-# 36-nextjs-hono-rpc
+# 31-nextjs-hono-rpc
 
 ## 1. 项目结构
 

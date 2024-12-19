@@ -67,14 +67,14 @@
 
     Next.js Route Handler: 服务端接口和中间件使用
 
+- [28-nextjs-mdx](https://github.com/huiru-wang/frontend-code-snippet/tree/main/28-nextjs-mdx#tailwind--mdx)
+
+    Next.js Mdx TailwindCSS
+
 - [30-nextjs-prisma](https://github.com/huiru-wang/frontend-code-snippet/tree/main/30-nextjs-prisma#30-nextjs-prisma)
 
     Next.js + Prisma
 
-- [35-nextjs-hono](https://github.com/huiru-wang/frontend-code-snippet/tree/main/35-nextjs-hono#35-nextjs-hono)
+- [31-nextjs-hono-rpc](https://github.com/huiru-wang/frontend-code-snippet/tree/main/31-nextjs-hono-rpc#36-nextjs-hono-rpc)
 
-    Next.js + hono，Nextjs的route handler由hono代理
-
-- [36-nextjs-hono-rpc](https://github.com/huiru-wang/frontend-code-snippet/tree/main/36-nextjs-hono-rpc#36-nextjs-hono-rpc)
-
-    Next.js + hono，将hono的服务端代理单独放在`src/server`中，更好管理项目结构
+    Next.js + hono RPC client
