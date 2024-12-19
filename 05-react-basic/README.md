@@ -1,5 +1,15 @@
 # 05-react-basic
-
+- [初始化项目](#初始化项目)
+  - [1. 初始化一个项目](#1-初始化一个项目)
+  - [2. 使用vite](#2-使用vite)
+  - [3. 引入React和TypeScript](#3-引入react和typescript)
+  - [4. 配置TypeScript](#4-配置typescript)
+  - [5. 配置项目入口，并启动项目](#5-配置项目入口并启动项目)
+  - [6. 使用`Postcss` 和 `Tailwind CSS`](#6-使用postcss-和-tailwind-css)
+- [脚手架快速创建]
+- [项目结构](#项目结构)
+- [父子组件传递props](#父子组件传递props)
+- [routes](#routes)
 ## 初始化项目
 
 ### 1. 初始化一个项目
@@ -279,6 +289,15 @@ createRoot(document.getElementById('root')!).render(
         </div>
     </StrictMode>
 )
+```
+
+## 脚手架快速创建
+```shell
+pnpm create vite@latest
+```
+继续安装Tailwindcss
+```shell
+
 ```
 
 ## 项目结构

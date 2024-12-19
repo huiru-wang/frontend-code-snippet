@@ -1,9 +1,17 @@
-export default function Home() {
+import { getPostById } from "@/actions/posts";
+
+export default async function Home() {
+
+  const post = await getPostById(1);
+
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen">
-      <h1 className="text-3xl">
-        Hello Next.js and Prisma
-      </h1>
-    </div>
+    <>
+      <h1>Title: {post?.title}</h1>
+      <p>Tags: {post?.tags}</p>
+      <p>category: {post?.category}</p>
+      <p>Content: {post?.content}</p>
+      <p>published: {post?.published}</p>
+      <p>author: {post?.author}</p>
+    </>
   );
 }

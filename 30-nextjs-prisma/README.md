@@ -1,103 +1,139 @@
 # 30-nextjs-prisma
 
 
-1. 引入Prisma
+## 1. 项目结构
+```shell
+prisma/
+  |-- schema.prisma
+src/
+  |--actions/
+  |    |-- posts.ts
+  |
+  |--app/
+  |    |-- api/
+  |        |-- posts/
+  |                |-- route.ts
+  |--types/
+  |    |-- index.ts
+.env
+```
+
+## 2. postgresql实例
+
+启动一个Postgres实例
+```shell
+# PostgreSQL
+docker pull postgres:14.15
+docker run -d --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres:14.15
+
+docker exec -it postgres /bin/bash
+docker exec -it postgres psql -U postgres
+```
+
+## 3. Prisma
 ```shell
 pnpm i prisma@latest -D
 ```
 
-2. 初始化数据源，以sqlite为例，不需要额外准备或启动外部数据库服务
+初始化数据源，以sqlite为例，不需要额外准备或启动外部数据库服务
 ```shell
-pnpm prisma init --datasource-provider sqlite
+pnpm prisma init --datasource-provider postgresql
 ```
-执行完成后自动创建：`/prisma/schema.prisma`文件，在此基础上，增加`User`、`Post`两个model
-```prisma
 
-// prisma与DB交互的客户端
+执行完成后自动创建：`/prisma/schema.prisma`文件，在此基础上，增加`Post`model
+```prisma
 generator client {
   provider = "prisma-client-js"
 }
 
-// DB相关元数据
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-// 数据模型
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
-}
-
+// model
 model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String   @db.VarChar(255)
+  tags      String[]
+  category  String
   content   String?
-  published Boolean @default(false)
-  author    User    @relation(fields: [authorId], references: [id])
-  authorId  Int
+  published Boolean  @default(false)
+  author    String
 }
 ```
 
-3.执行数据迁移、创建数据库db文件
+创建`.env`文件用于配置数据库连接信息
+```env
+# postgresql
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/code_snippet?schema=Post"
+```
+
+执行数据迁移、创建数据库db文件
 ```shell
 pnpm prisma migrate dev --name init
 ```
-会自动生成以下文件：
 
+自动生成以下文件：
 ```shell
 prisma/
     |-- dev.db
     |-- migrations/
             |-- 20230925150107_init/
                     |-- migration.sql
-.env
-```
-其中`.env`文件用于配置数据库连接信息，这里是sqlite，无需配置其他信息，直接执行本地db查询和插入
-```env
-DATABASE_URL="file:./dev.db"
 ```
 
 
-## 使用Prisma Client API
+## 4. 数据库交互
 
-1. 创建db交互客户端: `/scr/db.ts`
+创建db交互客户端: `src/actions/posts.ts`
 ```ts
-import { PrismaClient, User } from '@prisma/client'
+import { CreatePostRequest } from '@/types';
+import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-export async function createUser(name: string, email: string): Promise<User> {
-    // ... you will write your Prisma Client queries here
-    const user = await prisma.user.create({
-        data: {
-            name: name,
-            email: email,
-        },
-    })
-    return user;
+/**
+ * Get post by id
+ * 
+ * @param id id
+ * @returns post
+ */
+export const getPostById = async (id: number) => {
+    return await prisma.post.findUnique({
+        where: { id: id }
+    });
 }
 
-export async function getUser(id: number) {
-    // ... you will write your Prisma Client queries here
-    const user = await prisma.user.findUnique({
-        where: {
-            id: id,
+/**
+ * Create post
+ * 
+ * @param createRequest createRequest
+ * @returns created post
+ */
+export const createPost = async (createRequest: CreatePostRequest) => {
+
+    const post = await prisma.post.create({
+        data: {
+            title: createRequest.title,
+            content: createRequest.content,
+            tags: createRequest.tags,
+            category: createRequest.category,
+            published: createRequest.published,
+            author: createRequest.author,
         },
-    })
-    return user
+    });
+    return post;
 }
 ```
 
-2. 创建`/app/api/route.ts`，以执行数据库操作
+创建`/app/api/posts/route.ts`，以执行数据库操作
 ```ts
 import { createUser, getUser } from "@/db"
 import { NextRequest, NextResponse } from "next/server"
 
-// get
 export const GET = async (request: NextRequest) => {
     const searchParam = request.nextUrl.searchParams;
     const id = Number(searchParam.get("id"))
@@ -107,8 +143,6 @@ export const GET = async (request: NextRequest) => {
         user,
     })
 }
-
-// 创建
 export const POST = async (request: NextRequest) => {
     const { name, email } = await request.json();
     const user = await createUser(name, email);
@@ -119,22 +153,7 @@ export const POST = async (request: NextRequest) => {
 }
 ```
 
-3. 执行POST请求，创建用户，可以在浏览器console执行：
-```js
-fetch('http://localhost:3000/api', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        name: 'will',
-        email: 'will@gmail.com'
-    })
-}).then(response => response.json())
-.then(data => console.log(data))
-.catch(error => console.error(error))
-```
-
-4. 执行GET请求，获取用户: http://localhost:3000/api?id=1
-
-
+## 5. 启动访问
+启动项目，访问：
+- [GET http://localhost:3000/api/posts/1](http://localhost:3000/api/posts/1)
+- [POST http://localhost:3000/api/posts](http://localhost:3000/api/posts)
