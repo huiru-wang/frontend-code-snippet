@@ -129,26 +129,29 @@ export const createPost = async (createRequest: CreatePostRequest) => {
 }
 ```
 
-创建`/app/api/posts/route.ts`，以执行数据库操作
+创建`/app/api/posts/route.ts`，暴漏GET、POST接口：
 ```ts
-import { createUser, getUser } from "@/db"
-import { NextRequest, NextResponse } from "next/server"
+import { getPostById, createPost } from "@/actions/posts"
+import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (request: NextRequest) => {
     const searchParam = request.nextUrl.searchParams;
     const id = Number(searchParam.get("id"))
-    const user = await getUser(id)
+    const post = await getPostById(id);
     return NextResponse.json({
         success: true,
-        user,
+        post,
     })
 }
+
 export const POST = async (request: NextRequest) => {
-    const { name, email } = await request.json();
-    const user = await createUser(name, email);
+
+    const requestBody = await request.json();
+    const post = await createPost(requestBody);
+
     return NextResponse.json({
         success: true,
-        user,
+        post,
     })
 }
 ```

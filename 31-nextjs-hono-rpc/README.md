@@ -87,10 +87,10 @@ export const HEAD = handle(app);
 ```
 
 启动项目，访问：
-- [GET http://localhost:3000/api/posts/1](http://localhost:3000/api/posts/1)
-- [POST http://localhost:3000/api/posts](http://localhost:3000/api/posts)
-- [PATCH http://localhost:3000/api/posts](http://localhost:3000/api/posts)
-- [DELETE http://localhost:3000/api/posts/1](http://localhost:3000/api/posts/1)
+- GET [http://localhost:3000/api/posts/1](http://localhost:3000/api/posts/1)
+- POST [http://localhost:3000/api/posts](http://localhost:3000/api/posts)
+- PATCH [http://localhost:3000/api/posts](http://localhost:3000/api/posts)
+- DELETE [http://localhost:3000/api/posts/1](http://localhost:3000/api/posts/1)
 
 ## 4. 使用hono client
 
@@ -136,21 +136,30 @@ loadEnvConfig(projectDir)
 在`src/app/blog/[slug]/page.tsx`中使用hono-client，访问后端服务
 
 ```tsx
-import { client } from "@/lib/hono-client";
+import { postsAPI } from "@/lib/hono-client";
 
-export default async function Home() {
+type PageProps = {
+    slug: string;
+};
 
-  const response = await postsAPI.$get();
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-  const book = await response.json();
+export default async function Page({ params }: { params: PageProps }) {
 
-  return (
-    <div>
-      <h1>Get books from hono: {book}</h1>
-    </div>
-  );
+    const { slug } = await params;
+    const response = await postsAPI[slug].$get();
+    const result = await response.json();
+
+    return (
+        <div className="w-1/2 text-center pt-10 text-3xl">
+            <h1>{result.data}</h1>
+        </div>
+    );
 }
 ```
 
+## 5. 测试
+启动项目，访问：
+- 访问`src/app/blog/[slug]/page.tsx`: http://localhost:3000/blog/1
+- GET [http://localhost:3000/api/posts/1](http://localhost:3000/api/posts/1)
+- POST [http://localhost:3000/api/posts](http://localhost:3000/api/posts)
+- PATCH [http://localhost:3000/api/posts](http://localhost:3000/api/posts)
+- DELETE [http://localhost:3000/api/posts/1](http://localhost:3000/api/posts/1)
