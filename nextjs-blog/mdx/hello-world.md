@@ -1,5 +1,6 @@
 ---
 title: Hello World
+keywords: [test, hello]
 date: 2021-01-01
 description: This is a description.
 ---

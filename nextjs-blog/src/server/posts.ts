@@ -1,5 +1,6 @@
 import { Hono } from "hono";
-import { getPostById, createPost, updatePost, deletePost } from '@/lib/datasource';
+import { getPostById, createPost, updatePost, deletePost } from '@/lib/db';
+import { postCreateSchema, postUpdateSchema } from "@/lib/schema/posts";
 
 const app = new Hono()
     .get("/:id", async (c) => {
@@ -9,30 +10,20 @@ const app = new Hono()
     })
     .post("", async (c) => {
         const request = await c.req.json();
-        const createRequest = {
-            title: request.title,
-            content: request.content,
-            tags: request.tags,
-            category: request.category,
-            published: request.published,
-            author: request.author,
-        };
-        const post = await createPost(createRequest);
+        const parsedCreateRequest = postCreateSchema.safeParse(request);
+        if (!parsedCreateRequest.success) {
+            return c.json({ error: parsedCreateRequest.error.errors }, 400);
+        }
+        const post = await createPost(parsedCreateRequest.data);
         return c.json(post);
     })
-    .patch("/:id", async (c) => {
-        const id = c.req.param("id");
+    .patch("", async (c) => {
         const request = await c.req.json();
-        const updateUpdate = {
-            id: Number(id),
-            title: request.title,
-            content: request.content,
-            tags: request.tags,
-            category: request.category,
-            published: request.published,
-            author: request.author,
-        };
-        const post = await updatePost(updateUpdate);
+        const parsedUpdateRequest = postUpdateSchema.safeParse(request);
+        if (!parsedUpdateRequest.success) {
+            return c.json({ error: parsedUpdateRequest.error.errors }, 400);
+        }
+        const post = await updatePost(parsedUpdateRequest.data);
         return c.json(post);
     })
     .delete("/:id", async (c) => {

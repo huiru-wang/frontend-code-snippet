@@ -1,18 +1,8 @@
 
 import { PrismaClient } from '@prisma/client';
+import { CreatePostRequest, UpdatePostRequest } from '../types';
 
 const prisma = new PrismaClient();
-
-export type CreatePostRequest = {
-    title: string;
-    content: string;
-    tags: string[];
-    category: string;
-    published: boolean;
-    author: string;
-}
-
-export type UpdatePostRequest = CreatePostRequest & { id: number };
 
 /**
  * Get post by id
@@ -22,7 +12,7 @@ export type UpdatePostRequest = CreatePostRequest & { id: number };
  */
 export const getPostById = async (id: number) => {
     const post = await prisma.post.findUnique({
-        where: { id: Number(id) }
+        where: { id: id }
     });
     return post;
 }
@@ -87,7 +77,7 @@ export const deletePost = async (id: number) => {
         return;
     }
     const result = await prisma.post.delete({
-        where: { id: Number(id) }
+        where: { id: id }
     });
     if (result) {
         return true;

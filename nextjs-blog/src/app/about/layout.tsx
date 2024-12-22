@@ -2,9 +2,9 @@ import { Metadata } from "next";
 
 // SEO
 export const metadata: Metadata = {
-    title: "",
-    description: ""
-}
+    title: "web developer portfolio",
+    description: "web developer portfolio",
+};
 
 export default function Layout({ children, }: Readonly<{
     children: React.ReactNode;
