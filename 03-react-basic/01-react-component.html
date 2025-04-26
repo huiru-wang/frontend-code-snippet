@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React in Single HTML</title>
+    <!-- 引入 React 和 ReactDOM 的 CDN 链接 -->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <!-- 引入 Babel 来转换 JSX 代码 -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <!-- 根Dom元素 -->
+    <div id="root"></div>
+    <script type="text/babel">
+        const content = {
+            title: "Welcome to React in Single HTML",
+            details: "This is a simple example of using React in a single HTML file."
+        };
+
+        const products = [
+            { title: 'Cabbage', id: 1 },
+            { title: 'Garlic', id: 2 },
+            { title: 'Apple', id: 3 },
+        ];
+
+        // 定义一个简单的 React 组件
+        function App() {
+
+            // 渲染列表
+            const listItems = products.map(product =>
+                <li key={product.id}>
+                    {product.title}
+                </li>
+            );
+
+            return (
+                <div>
+                    <h1>{content.title}</h1>
+                    <p>{content.details}</p>
+                    <ul>{listItems}</ul>
+                </div>
+            );
+        }
+        // 使用 ReactDOM 将组件渲染到页面上
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+
+</html>

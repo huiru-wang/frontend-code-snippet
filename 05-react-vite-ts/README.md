@@ -14,14 +14,14 @@
 
 ### 1. 初始化一个项目
 ```shell
-mkdir 00-project-basic
-cd 00-project-basic
+mkdir 05-react-vite-ts
+cd 05-react-vite-ts
 pnpm init
 ```
 
 ```json
 {
-  "name": "00-project-basic",
+  "name": "05-react-vite-ts",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -42,7 +42,7 @@ pnpm add vite @vitejs/plugin-react -D
 
 ```json
 {
-  "name": "00-project-basic",
+  "name": "05-react-vite-ts",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -79,7 +79,7 @@ pnpm add @types/react @types/react-dom -D
 ```
 ```json
 {
-  "name": "00-project-basic",
+  "name": "05-react-vite-ts",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -227,7 +227,7 @@ pnpm dev
 ```
 项目结构
 ```shell
-00-project-basic
+05-react-vite-ts
     |- src/
         |- main.tsx
     |- index.html

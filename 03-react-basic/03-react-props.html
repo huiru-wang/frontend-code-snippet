@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Parent - Child Prop Passing</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // 子组件
+        function ChildComponent(props) {
+            return (
+                <div>
+                    <p>从父组件接收到的消息: {props.message}</p>
+                </div>
+            );
+        }
+
+        // 父组件
+        function ParentComponent() {
+            const messageToChild = "这是来自父组件的消息";
+            return (
+                <div>
+                    <h1>父组件</h1>
+                    {/* 将 messageToChild 作为 message 属性传递给子组件 */}
+                    <ChildComponent message={messageToChild} />
+                </div>
+            );
+        }
+
+        ReactDOM.render(<ParentComponent />, document.getElementById('root'));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning React State in HTML</title>
+    <!-- 引入 React 和 ReactDOM 的 CDN 链接 -->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <!-- 引入 Babel 来转换 JSX 代码 -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .blue-button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+        }
+    </style>
+    </style>
+</head>
+
+<body>
+    <!-- 定义用于渲染 React 组件的 DOM 节点 -->
+    <div id="root"></div>
+    <script type="text/babel">
+        // 引入 useState Hook
+        const { useState } = React;
+
+        // 定义一个计数器组件
+        function Counter() {
+            // 使用 useState Hook 初始化状态，count 为状态值，setCount 为更新状态的函数
+            const [count, setCount] = useState(0);
+
+            return (
+                <div>
+                    <h1>计数器示例</h1>
+                    <p>当前计数: {count}</p>
+                    <button className="blue-button" onClick={() => setCount(count + 1)}>增加</button>
+                    <button className="blue-button" onClick={() => setCount(count - 1)}>减少</button>
+                </div>
+            );
+        }
+
+        // 使用 ReactDOM 将组件渲染到页面上
+        ReactDOM.render(<Counter />, document.getElementById('root'));
+    </script>
+</body>
+
+</html>
