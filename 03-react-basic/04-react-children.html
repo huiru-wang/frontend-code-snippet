@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Children in HTML</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        // 利用children减少 组件间的嵌套
+
+        function WrapperComponent({ children }) {
+            return (
+                <div className="wrapper">
+                    <h2>以下是传递的children内容：</h2>
+                    {children}
+                </div>
+            );
+        }
+
+
+        function ParentComponent() {
+            return (
+                <WrapperComponent>
+                    <p>这是一段通过 children 传递的文本内容。</p>
+                    <button>示例按钮</button>
+                </WrapperComponent>
+            );
+        }
+
+        ReactDOM.render(<ParentComponent />, document.getElementById('root'));
+    </script>
+</body>
+
+</html>
