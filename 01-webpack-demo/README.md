@@ -364,3 +364,32 @@ module.exports = {
     }
 };
 ```
+
+## 支持TS
+
+```shell
+pnpm add ts-loader typescript
+```
+
+1. 创建tsconfig.json文件;
+2. 配置webpack.config.js，增加编译TS的loader；
+- webpack编译时，使用ts-loader对TS文件进行编译，ts-loader会找到`tsconfig.json`配置，并使用`tsc`进行编译。
+```js
+module.exports = {
+  // ....
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  // ....
+};    
+```
+3. 创建`user.ts`，并在`data.js`中引入使用；

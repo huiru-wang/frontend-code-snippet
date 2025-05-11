@@ -6,11 +6,40 @@
   - [4. 配置TypeScript](#4-配置typescript)
   - [5. 配置项目入口，并启动项目](#5-配置项目入口并启动项目)
   - [6. 使用`Postcss` 和 `Tailwind CSS`](#6-使用postcss-和-tailwind-css)
-- [脚手架快速创建]
-- [项目结构](#项目结构)
-- [父子组件传递props](#父子组件传递props)
 - [routes](#routes)
 ## 初始化项目
+
+从头开始构建一个React + TS + Tailwindcss项目，目标的项目结构：
+```shell
+05-react-vite-ts/
+  │
+  ├── public/                  # 静态资源目录，不会被 webpack 处理
+  │   └── vite.svg             # 示例图片
+  │
+  ├── src/                     # 源代码目录
+  │   ├── components/          # React 组件
+  │   │   └── ExampleComponent.tsx  # 示例组件
+  │   ├── pages/          
+  │   │   └── Home.tsx
+  │   ├── lib/          
+  │   │   └── utils.ts
+  │   │
+  │   ├── App.tsx              # 根组件
+  │   ├── App.css              # 全局样式文件
+  │   ├── main.tsx             # 入口文件，用于渲染根组件
+  │   └──vite-env.d.ts         # Vite 环境类型定义文件
+  │
+  ├── index.html               # Vite 的入口 HTML 文件
+  ├── tsconfig.json            # TypeScript 配置文件
+  ├── tsconfig.node.json
+  ├── tsconfig.app.json      
+  ├── vite.config.ts           # Vite 配置文件
+  ├── tailwind.config.cjs      # Tailwind CSS 配置文件
+  ├── postcss.config.cjs       # PostCSS 配置文件
+  └── package.json
+```
+
+如果使用脚手架：`pnpm create vite`即可，再手动配置tailwindcss；
 
 ### 1. 初始化一个项目
 ```shell
@@ -108,73 +137,16 @@ pnpm add @types/react @types/react-dom -D
 
 ### 4. 配置TypeScript
 
-通过3个文件配置TypeScript，通过`"include": [""]` 指定配置范围
-- `tsconfig.json`: 根配置文件
-- `tsconfig.app.json`: 配置react中src下的代码相关的TypeScript配置
-- `tsconfig.node.json`: 配置vite借助node来编译、构建、优化等相关的配置
+`vite`使用`esbuild`直接转译`ts`文件，无需Babel或tsc编译，因此只需要配置，不需要额外引入插件或依赖；
+- `esbuild` 是一个用 Go 语言编写的超快速 JavaScript 和 TypeScript 编译器，主要用于代码转译、打包和压缩；
+- 开发阶段：使用`esbuild`快速转译 TypeScript 和 JSX；
+- 生产阶段：使用`esbuild`快速转译 TypeScript 和 JSX，并压缩代码；
 
-```json
-{
-    "files": [],
-    "references": [
-        {"path": "./tsconfig.app.json"},
-        {"path": "./tsconfig.node.json"}
-    ]
-}
-```
-```json
-{
-    "compilerOptions": {
-        "target": "ES2020",
-        "useDefineForClassFields": true,
-        "lib": [
-            "ES2020",
-            "DOM",
-            "DOM.Iterable"
-        ],
-        "module": "ESNext",
-        "skipLibCheck": true,
-        /* Bundler mode */
-        "moduleResolution": "bundler",
-        "allowImportingTsExtensions": true,
-        "isolatedModules": true,
-        "moduleDetection": "force",
-        "noEmit": true,
-        "jsx": "react-jsx",
-        /* Linting */
-        "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true
-    },
-    "include": ["src"]
-}
-```
-```json
-{
-    "compilerOptions": {
-        "target": "ES2022",
-        "lib": [
-            "ES2023"
-        ],
-        "module": "ESNext",
-        "skipLibCheck": true,
-        /* Bundler mode */
-        "moduleResolution": "bundler",
-        "allowImportingTsExtensions": true,
-        "isolatedModules": true,
-        "moduleDetection": "force",
-        "noEmit": true,
-        /* Linting */
-        "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true
-    },
-    "include": [
-        "vite.config.ts", "./scripts"]
-}
-```
+通过3个文件配置TypeScript，通过`"include": [""]` 指定配置范围
+- `tsconfig.json`: 根配置文件, 将下面2个文件的配置合并到一起。
+- `tsconfig.app.json`: 用于编译src下的代码相关的TypeScript配置
+- `tsconfig.node.json`: 用于编译`vite.config.ts`配置vite借助node来编译、构建、优化等相关的配置
+
 
 ### 5. 配置项目入口，并启动项目
 
@@ -289,94 +261,6 @@ createRoot(document.getElementById('root')!).render(
         </div>
     </StrictMode>
 )
-```
-
-## 脚手架快速创建
-```shell
-pnpm create vite@latest
-```
-继续安装Tailwindcss
-```shell
-
-```
-
-## 项目结构
-```shell
-src/
-    |- components/              # 基础组件
-    |       |- Navbar.tsx
-    |       |- Tag.tsx
-    |- lib/                     # 类型、数据
-    |       |- types.ts
-    |       |- data.ts
-    |- pages/                   # 视图
-    |       |- TagList.tsx
-    |       |- BlogList.tsx
-    |       |- About.tsx
-    App.tsx
-    main.tsx
-index.html
-```
-
-## 父子组件传递props
-```tsx
-// 父组件 传递props
-const App: React.FC<{}> = () => {
-  const [blogs, setBlogs] = useState<BlogPost[]>(blogPosts)
-
-  // 点赞，将指定id的博客的like + 1
-  const like = (id: number) => {
-    setBlogs(
-        blogs.map(blog => {
-          if (blog.id === id) {
-            return { ...blog, like: blog.like + 1 }
-          } else {
-            return blog
-          }
-        })
-    )
-  }
-
-  return (
-    <>
-        // 传递props
-        <BlogList blogs={blogs} like={like} />
-    </>
-  )
-}
-```
-```tsx
-// 子组件 接收props
-interface BlogListProps {
-    blogs: BlogPost[];
-    like: (id: number) => void;
-}
-// 函数入参解构interface，获取blogs、like函数
-export const BlogList: React.FC<BlogListProps> = ({ blogs, like }) => {
-
-    return (
-        <div>
-            {
-                // 父组件props
-                blogs.map((blog) => (
-                    <div>
-                        // title
-                        <div>
-                            <h2>{blog.title}</h2>
-                        </div>
-
-                        // 点赞按钮，将父组件函数绑定在button上，点击button则调用父组件函数
-                        <div>
-                            <button
-                                onClick={() => like(blog.id)}>
-                                Like {blog.like}
-                            </button>
-                        </div>
-                    </div>
-                ))}
-        </div>
-    )
-}
 ```
 
 ## routes

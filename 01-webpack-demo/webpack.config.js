@@ -13,6 +13,7 @@ module.exports = {
         static: './dist',  // 开发服务器：指定打包后的目录
     },
     resolve: {
+        extensions: ['.js', '.json', '.ts'],  // 解析文件的后缀名
         alias: {
             '@': path.resolve(__dirname, 'src')
         }
@@ -36,7 +37,13 @@ module.exports = {
                         presets: ['@babel/preset-env']
                     }
                 }
-            }
+            },
+            // TS支持
+            {
+                test: /\.ts$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
         ]
     },
     plugins: [
